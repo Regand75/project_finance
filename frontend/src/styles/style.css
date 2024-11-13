@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../static/fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Medium";
+    src: url("../static/fonts/Roboto-Medium.ttf");
+    font-weight: 500;
+}
+
+.custom-font {
+    font-family: "Roboto", sans-serif;
+}
+
+.fs-40 {
+    font-size: 40px !important;
+}
+
+.fs-15 {
+    font-size: 15px !important;
+}
+
+.fs-12 {
+    font-size: 12px !important;
+}
+
+.fw-500 {
+    font-weight: 500 !important;
+}
+
+.fs-15::placeholder {
+    font-size: 15px !important;
+}
+
+.form-signin {
+    max-width: 397px;
+    padding: 1rem;
+}
+
+.form-title {
+    font-family: "Roboto-Medium", sans-serif;
+    color: #052c65;
+}
+
