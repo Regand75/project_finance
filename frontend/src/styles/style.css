@@ -11,3 +11,16 @@
     color: #052c65 !important;
 }
 
+.btn-toggle svg {
+    transition: transform 0.35s ease; /* Плавный поворот */
+    transform-origin: center;        /* Точка вращения */
+}
+
+.btn-toggle.collapsed svg {
+    transform: rotate(0deg); /* Состояние "свернуто" */
+}
+
+.btn-toggle:not(.collapsed) svg {
+    transform: rotate(90deg); /* Состояние "развернуто" */
+}
+
