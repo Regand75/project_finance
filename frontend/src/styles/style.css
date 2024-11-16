@@ -1,26 +1,35 @@
-.custom-font {
-    font-family: "Roboto", sans-serif;
+.main-filter {
+    margin-bottom: 140px;
 }
 
-.form-signin .container{
-    max-width: 421px;
+.chart-income-block {
+    max-width: 593px;
 }
 
-.form-title {
-    font-family: "Roboto-Medium", sans-serif;
-    color: #052c65 !important;
+.main-filter-block {
+    margin-right: 20px;
 }
 
-.btn-toggle svg {
-    transition: transform 0.35s ease; /* Плавный поворот */
-    transform-origin: center;        /* Точка вращения */
+.main-filter-block:has(button) {
+    width: 100px;
 }
 
-.btn-toggle.collapsed svg {
-    transform: rotate(0deg); /* Состояние "свернуто" */
+.chart-income-title {
+    margin-bottom: 20px;
 }
 
-.btn-toggle:not(.collapsed) svg {
-    transform: rotate(90deg); /* Состояние "развернуто" */
+.chart-income {
+    margin-bottom: 40px;
 }
 
+.chart-expenses-block {
+    max-width: 593px;
+}
+
+.chart-expenses-title {
+    margin-bottom: 20px;
+}
+
+.chart-expenses {
+    margin-bottom: 40px;
+}

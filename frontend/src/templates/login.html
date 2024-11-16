@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/auth.css">
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +15,12 @@
 <section class="form-signin w-100 m-auto">
     <div class="container">
         <form>
-            <div class="logo mb-5 text-center">
+            <div class="form-logo text-center">
                 <img src="../static/images/logo.png" alt="Логотип">
             </div>
-            <h1 class="form-title h3 mt-3 mb-3 fw-normal text-center fs-40 fw-500">Вход</h1>
+            <h1 class="form-title title text-center">Вход</h1>
 
-            <div class="input-group has-validation mt-1 mb-2">
+            <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -28,10 +28,10 @@
                               fill="#6C757D"/>
                     </svg>
                 </div>
-                <input type="email" class="form-control fs-15 custom-font is-invalid" id="email"
+                <input type="email" class="form-control text-black is-invalid" id="email"
                        placeholder="Электронная почта">
             </div>
-            <div class="input-group has-validation mt-1 mb-2">
+            <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
                     <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -39,20 +39,22 @@
                               fill="#6C757D"/>
                     </svg>
                 </div>
-                <input type="password" class="form-control fs-15 custom-font" id="password"
+                <input type="password" class="form-control text-black" id="password"
                        placeholder="Пароль">
             </div>
 
-            <div class="form-check mb-3 d-flex align-items-end">
+            <div class="form-check d-flex align-items-start">
                 <input class="form-check-input" type="checkbox" id="remember-me">
-                <label class="form-check-label fs-12 ms-2 text-black" for="remember-me">
+                <label class="form-check-label ms-2 text-black" for="remember-me">
                     Запомнить меня
                 </label>
             </div>
-            <button class="btn btn-primary w-100 py-2 mb-2" type="button" id="process-button">Войти</button>
-            <div class="text-body-secondary fs-12"><p class="text-black">Ещё нет аккаунта?<a class="form-link ps-2"
-                                                                                             href="sign-up.html">Пройдите
-                регистрацию</a></p></div>
+            <button class="form-button btn btn-primary w-100 py-2 fs-15" type="button" id="process-button">Войти</button>
+            <div class="form-text-block">
+                <p class="form-text text-black fs-12 my-0">
+                    Ещё нет аккаунта?<a class="form-link ps-2" href="sign-up.html">Пройдите регистрацию</a>
+                </p>
+            </div>
         </form>
     </div>
 </section>
