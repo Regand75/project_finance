@@ -1,13 +1,10 @@
 .main-filter {
-    margin-bottom: 140px;
+    margin-bottom: 116px;
+    gap: 20px;
 }
 
 .chart-income-block {
     max-width: 593px;
-}
-
-.main-filter-block {
-    margin-right: 20px;
 }
 
 .main-filter-block:has(button) {

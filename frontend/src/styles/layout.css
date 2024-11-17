@@ -1,3 +1,11 @@
+/*.sidebar {*/
+/*    bottom: 0;*/
+/*    float: none;*/
+/*    left: 0;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*}*/
+
 .sidebar-logo {
     padding: 40px 70px 20px 50px;
 }
@@ -34,3 +42,16 @@
 .bg-border-light {
     border-color: #d9d9d9;
 }
+
+.link-custom {
+    color: #052c65 !important;
+}
+
+.sidebar .nav-link.active {
+    color: #ffffff !important;
+}
+
+.sidebar .nav-link.active path{
+    fill: #ffffff !important;
+}
+
