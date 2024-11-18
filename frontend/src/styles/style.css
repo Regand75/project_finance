@@ -30,3 +30,39 @@
 .chart-expenses {
     margin-bottom: 40px;
 }
+
+.incomes-container {
+    gap: 20px;
+}
+
+.income-block {
+    max-width: 352px;
+    padding: 20px 100px 20px 20px;
+}
+
+.income-title {
+    margin-bottom: 10px;
+}
+
+.income-title-text {
+    font-family: 'Roboto-Medium', sans-serif;
+    font-size: 28px;
+    line-height: 33px;
+    color: #290661;
+}
+
+.income-active {
+    gap: 10px;
+}
+
+.income-edit, .income-delete{
+    font-family: 'Roboto-Medium', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    padding: 11px 16px 11px 16px;
+}
+
+.income-block-adding {
+    width: 352px;
+}
