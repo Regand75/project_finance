@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../../src/styles/common.css">
-    <link rel="stylesheet" href="../../src/styles/layout.css">
-    <link rel="stylesheet" href="../../src/styles/style.css">
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>
@@ -15,12 +15,12 @@
 <aside class="sidebar d-none d-md-flex flex-column border-end bg-border-light"
        style="width: 219px;">
     <div class="sidebar-logo border-bottom bg-border-light">
-        <img src="../../src/static/images/logo-main.png" alt="Логотип">
+        <img src="../static/images/logo-main.png" alt="Логотип">
     </div>
     <nav class="sidebar-menu mb-auto">
         <ul class="nav nav-pills flex-column fs-14">
             <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center link-custom pe-0 active"
+                <a href="#" class="nav-link d-flex align-items-center link-custom pe-0"
                    aria-current="page">
                     <svg class="pe-none me-2" width="15" height="14" viewBox="0 0 15 14" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li class="border border-primary rounded">
-                <button class="nav-link btn btn-toggle d-flex align-items-center justify-item-between link-custom rounded-0 border-0 collapsed fs-14 ps-3 active"
+                <button class="nav-link btn btn-toggle d-flex align-items-center justify-item-between link-custom rounded-bottom-0 border-0 collapsed fs-14 ps-3 active"
                         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
                     Категории
                     <svg class="path-svg" width="7" height="14" viewBox="0 0 7 14" fill="none"
@@ -67,11 +67,12 @@
                 </button>
                 <div class="collapse" id="dashboard-collapse" style="">
                     <ul class="btn-toggle-nav list-unstyled fw-normal">
-                        <li class=""><a href="#"
-                                        class="nav-link link-custom d-flex text-decoration-none rounded-0">Доходы</a>
+                        <li class="">
+                            <a href="#"
+                               class="nav-link link-custom d-flex text-decoration-none rounded-0 active">Доходы</a>
                         </li>
-                        <li class=""><a href="#"
-                                        class="nav-link link-custom d-flex text-decoration-none rounded-0 active">Расходы</a>
+                        <li class="">
+                            <a href="#" class="nav-link link-custom d-flex text-decoration-none rounded-0">Расходы</a>
                         </li>
                     </ul>
                 </div>
@@ -95,8 +96,8 @@
     </div>
 </aside>
 
-<section class="incomes ms-custom-section">
-    <div class="container min-vh-100 bg-light">
+<section class="edit-incomes ms-custom-section">
+    <div class="container min-vh-100">
         <div class="burger d-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list"
                  viewBox="0 0 16 16">
@@ -104,70 +105,20 @@
                       d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
             </svg>
         </div>
-        <div class="main-title-block title-block mx-xl-5">
-            <h1 class="main-title title">Доходы</h1>
+        <div class="edit-incomes-title-block title-block mx-xl-5">
+            <h1 class="edit-incomes-title title">Редактирование категории доходов</h1>
         </div>
-        <div class="row mx-xl-5">
-            <div class="incomes-container d-flex flex-row flex-wrap px-xl-0">
-                <div class="income-block border bg-border-custom rounded">
-                    <div class="income-title">
-                        <h3 class="income-title-text">Депозиты</h3>
-                    </div>
-                    <div class="income-active d-flex">
-                        <button class="income-edit btn btn-primary" type="button">Редактировать</button>
-                        <button class="income-delete btn btn-danger" type="button">Удалить</button>
-                    </div>
-                </div>
-                <div class="income-block border bg-border-custom rounded">
-                    <div class="income-title">
-                        <h3 class="income-title-text">Зарплата</h3>
-                    </div>
-                    <div class="income-active d-flex">
-                        <button class="income-edit btn btn-primary" type="button">Редактировать</button>
-                        <button class="income-delete btn btn-danger" type="button">Удалить</button>
-                    </div>
-                </div>
-                <div class="income-block border bg-border-custom rounded">
-                    <div class="income-title">
-                        <h3 class="income-title-text">Сбережения</h3>
-                    </div>
-                    <div class="income-active d-flex">
-                        <button class="income-edit btn btn-primary" type="button">Редактировать</button>
-                        <button class="income-delete btn btn-danger" type="button">Удалить</button>
-                    </div>
-                </div>
-                <div class="income-block border bg-border-custom rounded">
-                    <div class="income-title">
-                        <h3 class="income-title-text">Инвестиции</h3>
-                    </div>
-                    <div class="income-active d-flex">
-                        <button class="income-edit btn btn-primary" type="button">Редактировать</button>
-                        <button class="income-delete btn btn-danger" type="button">Удалить</button>
-                    </div>
-                </div>
-                <div class="income-block-adding d-flex align-items-center justify-content-center border bg-border-custom rounded">
-                    <div class="income-svg">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14.5469 6.08984V9.05664H0.902344V6.08984H14.5469ZM9.32422 0.511719V15.0039H6.13867V0.511719H9.32422Z"
-                                  fill="#CED4DA"/>
-                        </svg>
-                    </div>
+        <div class="edit-incomes-container mx-xl-5 pb-3">
+            <div class="edit-income-block w-100">
+                <input class="form-control input-custom text-dark" type="text" placeholder="Жилье" required>
+                <div class="edit-income-active d-flex">
+                    <button class="btn btn-success btn-custom" type="button">Сохранить</button>
+                    <button class="btn btn-danger btn-custom" type="button">Отмена</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<div class="modal-overlay">
-    <div class="modal-window border border-light rounded-4">
-        <p class="modal-text">Вы действительно хотите удалить категорию? Связанные доходы будут удалены навсегда.</p>
-        <div class="modal-active d-flex justify-content-center">
-            <button class="btn btn-success" type="button">Да, удалить</button>
-            <button class="btn btn-danger" type="button">Не удалять</button>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>

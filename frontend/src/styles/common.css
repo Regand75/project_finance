@@ -25,6 +25,13 @@
     margin-left: 219px;
 }
 
+.btn-custom {
+    padding: 11px 16px !important;
+    font-family: 'Roboto-Medium', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+}
+
 .fs-12 {
     font-size: 12px !important;
 }
@@ -88,13 +95,27 @@
     gap: 12px;
 }
 
-.modal-active button {
-    padding: 11px 16px;
-}
+/*.modal-active button {*/
+/*    padding: 11px 16px;*/
+/*}*/
 
 .modal-overlay.active {
     visibility: visible;
     opacity: 1;
+}
+
+.container .input-custom {
+    padding: 7px 16px;
+    margin-bottom: 20px;
+    width: 397px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+    color: #000000 !important;
+}
+
+.container .input-custom::placeholder {
+    color: #6C757D;
 }
 
 @media screen and (max-width: 767px) {
@@ -104,5 +125,21 @@
 
     .container {
         max-width: 767px !important;
+    }
+}
+
+@media screen and (max-width: 421px) {
+    .container .input-custom {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .title {
+        font-size: 35px;
     }
 }
