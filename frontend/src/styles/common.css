@@ -21,6 +21,7 @@
     font-weight: 700;
 }
 
+
 .ms-custom-section {
     margin-left: 219px;
 }
@@ -95,10 +96,6 @@
     gap: 12px;
 }
 
-/*.modal-active button {*/
-/*    padding: 11px 16px;*/
-/*}*/
-
 .modal-overlay.active {
     visibility: visible;
     opacity: 1;
@@ -116,6 +113,15 @@
 
 .container .input-custom::placeholder {
     color: #6C757D;
+}
+
+.burger {
+    position: fixed;
+    top: 0;
+}
+
+.burger-margin {
+    margin-left: 219px;
 }
 
 @media screen and (max-width: 767px) {

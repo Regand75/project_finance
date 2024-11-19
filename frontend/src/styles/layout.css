@@ -6,6 +6,10 @@
     top: 0;
 }
 
+.sidebar-background {
+    background-color: #ffffff;
+}
+
 .sidebar-logo {
     padding: 40px 70px 20px 50px;
 }

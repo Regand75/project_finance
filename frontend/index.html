@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/styles/common.css">
     <link rel="stylesheet" href="src/styles/layout.css">
     <link rel="stylesheet" href="src/styles/style.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>
+    <script src="src/scripts/script.js" defer></script>
 </head>
 
 <body class="d-flex min-vh-100">
-<aside class="sidebar d-none d-md-flex flex-column border-end bg-border-light"
+<aside class="sidebar d-none d-md-flex flex-column border-end bg-border-light" id="sidebar"
        style="width: 219px;">
     <div class="sidebar-logo border-bottom bg-border-light">
         <img src="src/static/images/logo-main.png" alt="Логотип">
@@ -97,15 +98,16 @@
     </div>
 </aside>
 
+<div class="burger d-md-none d-block p-1 w-100 bg-body" id="burger">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list"
+         viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+    </svg>
+</div>
+
 <section class="main ms-custom-section">
     <div class="container min-vh-100">
-        <div class="burger d-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list"
-                 viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-        </div>
         <div class="main-title-block title-block mx-xl-5">
             <h1 class="main-title title">Главная</h1>
         </div>
