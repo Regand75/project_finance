@@ -71,8 +71,22 @@
 .creating-income-active,
 .edit-income-active,
 .creating-expense-active,
-.edit-expense-active {
+.edit-expense-active,
+.incomes-expenses-active {
     gap: 10px;
+}
+
+.incomes-expenses-active {
+    margin-bottom: 40px;
+}
+
+.incomes-expenses-filter {
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+.incomes-expenses-filter-block:has(button) {
+    width: 100px;
 }
 
 @media screen and (max-width: 375px) {

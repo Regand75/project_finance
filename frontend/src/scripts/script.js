@@ -8,10 +8,13 @@ const userIconElement = document.getElementById("user-icon");
 const dropdownMenuElement = document.getElementById("dropdown-menu");
 
 burgerElement.addEventListener('click', showSidebar);
-buttonNoDeleteElement.addEventListener('click', hideModal);
 buttonDeleteIncomeElements.forEach(button => {
     button.addEventListener('click', showModal);
 });
+if (buttonNoDeleteElement) {
+    buttonNoDeleteElement.addEventListener('click', hideModal);
+}
+
 buttonDeleteExpenseElements.forEach(button => {
     button.addEventListener('click', showModal);
 });
