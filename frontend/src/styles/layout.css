@@ -4,6 +4,7 @@
     left: 0;
     position: fixed;
     top: 0;
+    width: 219px;
 }
 
 .sidebar-background {
@@ -41,6 +42,22 @@
 
 .user-panel {
     padding: 20px 10px 40px 20px;
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    margin: 0;
+    transform: translate3d(0px, -36px, 0px);
+}
+
+.user-info {
+    font-family: 'Roboto', sans-serif;
+}
+
+.dropdown-item {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .bg-border-light {

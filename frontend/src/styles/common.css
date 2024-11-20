@@ -21,6 +21,10 @@
     font-weight: 700;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
 .ms-custom-section {
     margin-left: 219px;
@@ -147,5 +151,9 @@
 @media screen and (max-width: 375px) {
     .title {
         font-size: 35px;
+    }
+
+    .modal-window {
+        padding: 10px;
     }
 }

@@ -31,31 +31,31 @@
     margin-bottom: 40px;
 }
 
-.incomes-container {
+.incomes-container, .expenses-container {
     gap: 20px;
 }
 
-.income-block {
+.income-block, .expense-block {
     width: 350px;
     padding: 20px;
 }
 
-.income-title {
+.income-title, .expense-title {
     margin-bottom: 10px;
 }
 
-.income-title-text {
+.income-title-text, .expense-title-text {
     font-family: 'Roboto-Medium', sans-serif;
     font-size: 28px;
     line-height: 33px;
     color: #290661;
 }
 
-.income-active {
+.income-active, .expense-active {
     gap: 10px;
 }
 
-.income-edit, .income-delete{
+.income-active, .expense-active button {
     font-family: 'Roboto-Medium', sans-serif;
     font-size: 14px;
     line-height: 16px;
@@ -63,17 +63,23 @@
     padding: 11px 16px 11px 16px;
 }
 
-.income-block-adding {
+.income-block-adding, .expense-block-adding {
     width: 350px;
     padding: 48px;
 }
 
-.creating-income-active, .edit-income-active {
+.creating-income-active,
+.edit-income-active,
+.creating-expense-active,
+.edit-expense-active {
     gap: 10px;
 }
 
 @media screen and (max-width: 375px) {
-    .income-block, .income-block-adding {
+    .income-block,
+    .expense-block,
+    .income-block-adding,
+    .expense-block-adding {
         width: 100%;
     }
 }
