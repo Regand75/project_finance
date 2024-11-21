@@ -55,12 +55,12 @@
     gap: 10px;
 }
 
-.income-active, .expense-active button {
+.income-active button,
+.expense-active button {
     font-family: 'Roboto-Medium', sans-serif;
     font-size: 14px;
     line-height: 16px;
     text-align: center;
-    padding: 11px 16px 11px 16px;
 }
 
 .income-block-adding, .expense-block-adding {
@@ -87,6 +87,13 @@
 
 .incomes-expenses-filter-block:has(button) {
     width: 100px;
+}
+
+.table .table-font-custom {
+    font-family: 'Roboto-Bold', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    color: #052C65;
 }
 
 @media screen and (max-width: 375px) {

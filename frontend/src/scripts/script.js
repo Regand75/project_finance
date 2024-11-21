@@ -3,14 +3,17 @@ const sidebarElement = document.getElementById("sidebar");
 const modalOverlayElement = document.getElementById("modal-overlay");
 const buttonDeleteIncomeElements = document.querySelectorAll('.income-delete');
 const buttonDeleteExpenseElements = document.querySelectorAll('.expense-delete');
+const buttonDeleteIncomeExpenseElement = document.querySelectorAll(".income-expense-delete");
 const buttonNoDeleteElement = document.getElementById("no-delete");
 const userIconElement = document.getElementById("user-icon");
 const dropdownMenuElement = document.getElementById("dropdown-menu");
 
 burgerElement.addEventListener('click', showSidebar);
+
 buttonDeleteIncomeElements.forEach(button => {
     button.addEventListener('click', showModal);
 });
+
 if (buttonNoDeleteElement) {
     buttonNoDeleteElement.addEventListener('click', hideModal);
 }
@@ -18,7 +21,13 @@ if (buttonNoDeleteElement) {
 buttonDeleteExpenseElements.forEach(button => {
     button.addEventListener('click', showModal);
 });
+
 userIconElement.addEventListener('click', showLogout);
+
+buttonDeleteIncomeExpenseElement.forEach(button => {
+    button.addEventListener('click', showModal);
+})
+
 
 function showSidebar() {
     sidebarElement.classList.toggle("d-none");

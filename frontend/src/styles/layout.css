@@ -51,13 +51,13 @@
     transform: translate3d(0px, -36px, 0px);
 }
 
-.user-info {
-    font-family: 'Roboto', sans-serif;
-}
+/*.user-info {*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*}*/
 
 .dropdown-item {
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
 }
 
 .bg-border-light {
@@ -65,14 +65,14 @@
 }
 
 .link-custom {
-    color: #052c65 !important;
+    color: #052c65;
 }
 
 .sidebar .nav-link.active {
-    color: #ffffff !important;
+    color: #ffffff;
 }
 
 .sidebar .nav-link.active path{
-    fill: #ffffff !important;
+    fill: #ffffff;
 }
 
