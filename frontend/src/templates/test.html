@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--    <script src="../scripts/chart.js" defer></script>-->
+</head>
+<body>
+<h1>Пример круговой диаграммы</h1>
+<canvas id="pieChart" width="400" height="400"></canvas>
+
+<script>
+    // import Chart from 'chart.js/auto';
+
+    const data = {
+        labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'], // Названия категорий
+        datasets: [
+            {
+                label: 'My Dataset',
+                data: [10, 20, 30, 15, 25], // Ваши значения
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(255, 205, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1 // Толщина границ
+            }
+        ]
+    };
+
+    const config = {
+        type: 'pie', // Тип диаграммы
+        data: data, // Подключение данных
+        options: {
+            responsive: true, // Диаграмма адаптируется к размерам контейнера
+            plugins: {
+                legend: {
+                    position: 'top', // Положение легенды
+                },
+                title: {
+                    display: true, // Включение заголовка
+                    text: 'My Pie Chart' // Текст заголовка
+                }
+            }
+        },
+    };
+
+    // Инициализация диаграммы
+    const ctx = document.getElementById('pieChart').getContext('2d');
+    const myPieChart = new Chart(ctx, config);
+</script>
+</body>
+</html>

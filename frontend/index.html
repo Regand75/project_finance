@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="src/styles/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="src/scripts/piechart.js" defer></script>
     <script src="src/scripts/script.js" defer></script>
 </head>
 
-<body class="d-flex min-vh-100">
+<body class="min-vh-100">
 <aside class="sidebar d-none d-md-flex flex-column border-end bg-border-light" id="sidebar">
     <div class="sidebar-logo border-bottom bg-border-light">
         <img src="src/static/images/logo-main.png" alt="Логотип">
@@ -157,19 +159,17 @@
                 <span>30.11.2024</span>
             </div>
         </div>
-        <div class="main-charts d-flex flex-column flex-md-row justify-content-md-between align-items-center mx-xl-5">
-            <div class="chart-income-block d-flex flex-column align-items-center">
+        <div class="main-charts d-flex flex-column flex-md-row align-items-center mx-xl-5">
+            <div class="chart-income-block d-flex flex-column align-items-center w-100">
                 <h3 class="chart-income-title pe-md-5">Доходы</h3>
                 <div class="chart-income d-flex flex-column align-items-center bg-border-light border-end align-self-center pe-md-5">
-                    <img class="mb-4 w-100" src="src/static/images/pie-legend.png" alt="">
-                    <img class="mb-4 w-100" src="src/static/images/group.png" alt="">
+                    <canvas id="pieChartIncomes" width="450" height="450"></canvas>
                 </div>
             </div>
-            <div class="chart-expenses-block d-flex flex-column align-items-center">
+            <div class="chart-expenses-block d-flex flex-column align-items-center w-100">
                 <h3 class="chart-expenses-title ps-md-5">Расходы</h3>
-                <div class="chart-expenses d-flex flex-column align-items-center align-self-center ps-md-5">
-                    <img class="mb-4 w-100" src="src/static/images/pie-legend.png" alt="">
-                    <img class="mb-4 w-100" src="src/static/images/group.png" alt="">
+                <div class="chart-expenses d-flex flex-column align-items-center align-self-center ps-md-5" id="myPieChart">
+                    <canvas id="pieChartExpenses" width="450" height="450"></canvas>
                 </div>
             </div>
         </div>
