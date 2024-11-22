@@ -1,9 +1,14 @@
+a {
+    text-decoration: underline;
+}
+
 .form-logo {
     margin-bottom: 60px;
 }
 
 .form-signin .container {
     max-width: 421px;
+    margin-left: auto;
 }
 
 .input-group {
@@ -21,7 +26,7 @@
 }
 
 .form-check {
-    margin-bottom: 10px !important;
+    margin-bottom: 10px;
 }
 
 .form-check-label {
@@ -31,8 +36,8 @@
 }
 
 .form-button {
-    font-family: "Roboto-Medium", sans-serif !important;
-    font-weight: 500 !important;
+    font-family: "Roboto-Medium", sans-serif;
+    font-weight: 500;
     margin-top: 10px;
     margin-bottom: 10px;
 }

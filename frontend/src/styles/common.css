@@ -115,12 +115,15 @@ a {
 
 .container .input-custom {
     padding: 7px 16px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 397px;
-    /*font-family: 'Roboto', sans-serif;*/
     font-size: 15px;
     line-height: 24px;
     color: #000000;
+}
+
+.container .input-custom:last-of-type {
+    margin-bottom: 20px;
 }
 
 .container .input-custom::placeholder {
@@ -136,32 +139,3 @@ a {
     margin-left: 219px;
 }
 
-@media screen and (max-width: 767px) {
-    .ms-custom-section {
-        margin-left: 0;
-    }
-
-    .container {
-        max-width: 767px;
-    }
-}
-
-@media screen and (max-width: 421px) {
-    .container .input-custom {
-        width: 100%;
-    }
-
-    .title {
-        font-size: 35px;
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .title {
-        font-size: 35px;
-    }
-
-    .modal-window {
-        padding: 10px;
-    }
-}

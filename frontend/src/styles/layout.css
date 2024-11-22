@@ -51,13 +51,8 @@
     transform: translate3d(0px, -36px, 0px);
 }
 
-/*.user-info {*/
-/*    font-family: 'Roboto', sans-serif;*/
-/*}*/
-
 .dropdown-item {
     font-size: 14px;
-    /*font-family: 'Roboto', sans-serif;*/
 }
 
 .bg-border-light {

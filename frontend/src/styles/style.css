@@ -98,32 +98,4 @@
     color: #052C65;
 }
 
-@media screen and (max-width: 1399px) {
-    .chart-income-block, .chart-expenses-block {
-        max-width: 480px;
-    }
-    .chart-income, .chart-expenses {
-        padding-right: 20px;
-        padding-left: 20px;
-    }
-}
 
-@media screen and (max-width: 1169px) {
-    .main-charts {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .chart-income {
-        border-right: none !important;
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .income-block,
-    .expense-block,
-    .income-block-adding,
-    .expense-block-adding {
-        width: 100%;
-    }
-}

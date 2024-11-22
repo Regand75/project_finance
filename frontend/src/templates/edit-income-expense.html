@@ -68,7 +68,7 @@
                 <div class="collapse" id="dashboard-collapse" style="">
                     <ul class="btn-toggle-nav list-unstyled fw-normal">
                         <li>
-                            <a href="#"
+                            <a href="incomes.html"
                                class="nav-link link-custom d-flex text-decoration-none rounded-0 active">Доходы</a>
                         </li>
                         <li>
@@ -108,70 +108,43 @@
     </svg>
 </div>
 
-<section class="incomes ms-custom-section">
-    <div class="container">
-        <div class="incomes-title-block title-block mx-xl-5">
-            <h1 class="incomes-title title">Доходы</h1>
+<section class="creating-incomes ms-custom-section">
+    <div class="container min-vh-100">
+        <div class="creating-incomes-title-block title-block mx-xl-5">
+            <h1 class="creating-incomes-title title">Редактирование дохода/расхода</h1>
         </div>
-        <div class="incomes-container d-flex flex-row flex-wrap mx-xl-5 pb-3">
-            <div class="income-block border bg-border-custom rounded">
-                <div class="income-title">
-                    <h3 class="income-title-text">Депозиты</h3>
-                </div>
-                <div class="income-active d-flex">
-                    <a href="edit-incomes.html" class="income-edit btn btn-primary btn-custom">Редактировать</a>
-                    <button class="income-delete btn btn-danger btn-custom" type="button">Удалить</button>
-                </div>
-            </div>
-            <div class="income-block border bg-border-custom rounded">
-                <div class="income-title">
-                    <h3 class="income-title-text">Зарплата</h3>
-                </div>
-                <div class="income-active d-flex">
-                    <a href="edit-incomes.html" class="income-edit btn btn-primary btn-custom">Редактировать</a>
-                    <button class="income-delete btn btn-danger btn-custom" type="button">Удалить</button>
-                </div>
-            </div>
-            <div class="income-block border bg-border-custom rounded">
-                <div class="income-title">
-                    <h3 class="income-title-text">Сбережения</h3>
-                </div>
-                <div class="income-active d-flex">
-                    <a href="edit-incomes.html" class="income-edit btn btn-primary btn-custom">Редактировать</a>
-                    <button class="income-delete btn btn-danger btn-custom" type="button">Удалить</button>
-                </div>
-            </div>
-            <div class="income-block border bg-border-custom rounded">
-                <div class="income-title">
-                    <h3 class="income-title-text">Инвестиции</h3>
-                </div>
-                <div class="income-active d-flex">
-                    <a href="edit-incomes.html" class="income-edit btn btn-primary btn-custom">Редактировать</a>
-                    <button class="income-delete btn btn-danger btn-custom" type="button">Удалить</button>
+        <div class="creating-incomes-container mx-xl-5 pb-3">
+            <div class="creating-income-block w-100">
+                <select class="form-control input-custom text-dark" name="category" id="category">
+                    <option value="income">Доход</option>
+                    <option value="expense">Расход</option>
+                </select>
+                <select class="form-control input-custom text-dark" name="category" id="category">
+                    <option value="deposits">Депозиты</option>
+                    <option value="salary">Зарплата</option>
+                    <option value="savings">Сбережения</option>
+                    <option value="investment">Инвестиции</option>
+                    <option value="meal">Еда</option>
+                    <option value=housing">Жильё</option>
+                    <option value="health">Здоровье</option>
+                    <option value="cafe">Кафе</option>
+                    <option value="auto">Авто</option>
+                    <option value="clothes">Одежда</option>
+                    <option value="entertainments">Развлечения</option>
+                    <option value="accounts">Счета</option>
+                    <option value="spert">Спорт</option>
+                </select>
+                <input class="form-control input-custom text-dark" type="text" placeholder="500$">
+                <input class="form-control input-custom text-dark" type="text" placeholder="16.11.2024">
+                <input class="form-control input-custom text-dark" type="text" placeholder="Комментарий...">
+                <div class="creating-income-active d-flex">
+                    <a href="#" class="btn btn-success btn-custom">Сохранить</a>
+                    <button class="btn btn-danger btn-custom" type="button">Отмена</button>
                 </div>
             </div>
-            <a href="creating-incomes.html" class="income-block-adding d-flex align-items-center justify-content-center border bg-border-custom rounded">
-                <div class="income-svg">
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.5469 6.08984V9.05664H0.902344V6.08984H14.5469ZM9.32422 0.511719V15.0039H6.13867V0.511719H9.32422Z"
-                              fill="#CED4DA"/>
-                    </svg>
-                </div>
-            </a>
         </div>
     </div>
 </section>
-
-<div class="modal-overlay" id="modal-overlay">
-    <div class="modal-window border border-light rounded-4 m-3">
-        <p class="modal-text">Вы действительно хотите удалить категорию? Связанные доходы будут удалены навсегда.</p>
-        <div class="modal-active d-flex justify-content-center">
-            <button class="btn btn-success btn-custom" id="modal-delete" type="button">Да, удалить</button>
-            <button class="btn btn-danger btn-custom" id="no-delete" type="button">Не удалять</button>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>
