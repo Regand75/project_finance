@@ -3,12 +3,12 @@
     gap: 20px;
 }
 
-.chart-income-block {
-    max-width: 593px;
-}
-
 .main-filter-block:has(button) {
     width: 100px;
+}
+
+.chart-income-block {
+    max-width: 610px;
 }
 
 .chart-income-title {
@@ -16,11 +16,12 @@
 }
 
 .chart-income {
-    margin-bottom: 40px;
+    padding: 0 60px 40px 60px;
+    max-width: 610px;
 }
 
 .chart-expenses-block {
-    max-width: 593px;
+    max-width: 610px;
 }
 
 .chart-expenses-title {
@@ -28,7 +29,8 @@
 }
 
 .chart-expenses {
-    margin-bottom: 40px;
+    padding: 0 60px 40px 60px;
+    max-width: 610px;
 }
 
 .incomes-container, .expenses-container {
@@ -94,6 +96,27 @@
     font-size: 16px;
     line-height: 19px;
     color: #052C65;
+}
+
+@media screen and (max-width: 1399px) {
+    .chart-income-block, .chart-expenses-block {
+        max-width: 480px;
+    }
+    .chart-income, .chart-expenses {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 1169px) {
+    .main-charts {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chart-income {
+        border-right: none !important;
+    }
 }
 
 @media screen and (max-width: 375px) {

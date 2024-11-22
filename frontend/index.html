@@ -159,19 +159,25 @@
                 <span>30.11.2024</span>
             </div>
         </div>
-        <div class="main-charts d-flex flex-column flex-md-row align-items-center mx-xl-5">
-            <div class="chart-income-block d-flex flex-column align-items-center w-100">
-                <h3 class="chart-income-title pe-md-5">Доходы</h3>
-                <div class="chart-income d-flex flex-column align-items-center bg-border-light border-end align-self-center pe-md-5">
-                    <canvas id="pieChartIncomes" width="450" height="450"></canvas>
+        <div class="main-charts d-flex">
+            <div class="chart-income-block w-100">
+                <h3 class="chart-income-title text-center">Доходы</h3>
+                <div class="chart-income bg-border-light border-end w-100">
+                    <canvas id="pieChartIncomes"></canvas>
                 </div>
             </div>
-            <div class="chart-expenses-block d-flex flex-column align-items-center w-100">
-                <h3 class="chart-expenses-title ps-md-5">Расходы</h3>
-                <div class="chart-expenses d-flex flex-column align-items-center align-self-center ps-md-5" id="myPieChart">
+            <div class="chart-expenses-block w-100">
+                <h3 class="chart-expenses-title text-center">Расходы</h3>
+                <div class="chart-expenses w-100">
                     <canvas id="pieChartExpenses" width="450" height="450"></canvas>
                 </div>
             </div>
+<!--            <div class="chart-expenses-block d-flex flex-column align-items-center w-100">-->
+<!--                <h3 class="chart-expenses-title ps-md-5">Расходы</h3>-->
+<!--                <div class="chart-expenses d-flex flex-column align-items-center align-self-center ps-md-5" id="myPieChart">-->
+<!--                    <canvas id="pieChartExpenses" width="450" height="450"></canvas>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </section>
