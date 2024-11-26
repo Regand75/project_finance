@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title id="title">Title</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/styles/common.css">
     <link rel="stylesheet" href="src/styles/layout.css">
-    <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="stylesheet" id="styles" href="src/styles/index.css">
     <link rel="stylesheet" href="src/styles/adaptive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="src/components/piechart.js" defer></script>
-    <script src="src/components/script.js" defer></script>
+<!--    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+<!--    <script src="src/components/piechart.js" defer></script>-->
+<!--    <script src="src/components/script.js" defer></script>-->
 </head>
 
 <body class="min-vh-100">
@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="src/templates/incomes-expenses.html" class="nav-link d-flex align-items-center link-custom  pe-0" aria-current="page">
+                <a href="src/templates/pages/incomes-expenses/incomes-expenses.html" class="nav-link d-flex align-items-center link-custom  pe-0" aria-current="page">
                     <svg class="pe-none me-2" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -71,11 +71,11 @@
                 <div class="collapse" id="dashboard-collapse" style="">
                     <ul class="btn-toggle-nav list-unstyled fw-normal">
                         <li>
-                            <a href="src/templates/incomes.html"
+                            <a href="src/templates/pages/incomes/incomes.html"
                                class="nav-link link-custom d-flex text-decoration-none rounded-0">Доходы</a>
                         </li>
                         <li>
-                            <a href="src/templates/expenses.html"
+                            <a href="src/templates/pages/expeinses/expenses.html"
                                class="nav-link link-custom d-flex text-decoration-none rounded-0">Расходы</a>
                         </li>
                     </ul>
@@ -112,76 +112,12 @@
     </svg>
 </div>
 
-<section class="main ms-custom-section">
-    <div class="container">
-        <div class="main-title-block title-block mx-xl-5">
-            <h1 class="main-title title">Главная</h1>
-        </div>
-        <div class="main-filter d-flex flex-row flex-wrap align-items-center mx-xl-5">
-            <div class="main-filter-block">
-                <button class="filter-button btn btn-secondary border-secondary w-100 active" type="button"
-                        id="main-button-today">Сегодня
-                </button>
-            </div>
-            <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-week">
-                    Неделя
-                </button>
-            </div>
-            <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-mouth">
-                    Месяц
-                </button>
-            </div>
-            <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-year">Год
-                </button>
-            </div>
-            <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-all">Все
-                </button>
-            </div>
-            <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button"
-                        id="main-button-interval">
-                    Интервал
-                </button>
-            </div>
-            <div class="main-filter-block">
-                <span>с</span>
-            </div>
-            <div class="main-filter-block">
-                <span>16.11.2024</span>
-            </div>
-            <div class="main-filter-block">
-                <span>по</span>
-            </div>
-            <div class="main-filter-block">
-                <span>30.11.2024</span>
-            </div>
-        </div>
-        <div class="main-charts d-flex">
-            <div class="chart-income-block w-100">
-                <h3 class="chart-income-title text-center">Доходы</h3>
-                <div class="chart-income bg-border-light border-end w-100">
-                    <canvas id="pieChartIncomes"></canvas>
-                </div>
-            </div>
-            <div class="chart-expenses-block w-100">
-                <h3 class="chart-expenses-title text-center">Расходы</h3>
-                <div class="chart-expenses w-100">
-                    <canvas id="pieChartExpenses" width="450" height="450"></canvas>
-                </div>
-            </div>
-<!--            <div class="chart-expenses-block d-flex flex-column align-items-center w-100">-->
-<!--                <h3 class="chart-expenses-title ps-md-5">Расходы</h3>-->
-<!--                <div class="chart-expenses d-flex flex-column align-items-center align-self-center ps-md-5" id="myPieChart">-->
-<!--                    <canvas id="pieChartExpenses" width="450" height="450"></canvas>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
-    </div>
-</section>
+<div id="content"></div>
 
+<script src="src/app.js" type="module"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="src/components/piechart.js"></script>
+<script src="src/components/script.js"></script>
 </body>
 </html>
