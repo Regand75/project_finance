@@ -20,7 +20,7 @@ export class Form {
             },
         ];
 
-        if (this.page === 'signup') {
+        if (this.page === 'sign-up') {
             this.fields.unshift(
                 {
                     name: 'name',
@@ -29,9 +29,9 @@ export class Form {
                     regex: /^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+(?:\s[А-ЯЁ][а-яё]+)?$/,
                     valid: false,
                 },)
-            this.fields.add(
+            this.fields.push(
                 {
-                    name: 'repeatPassword',
+                    name: 'repeat-password',
                     id: 'repeat-password',
                     element: null,
                     valid: false,
@@ -45,7 +45,9 @@ export class Form {
             }
         });
 
-        this.rememberMeElement = document.getElementById('remember-me'); // checkbox 'Запомнить меня'
+        if (this.page === 'login') {
+            this.rememberMeElement = document.getElementById('remember-me'); // checkbox 'Запомнить меня'
+        }
 
         this.processElement = document.getElementById('process-button');
         this.processElement.onclick = () => {
@@ -54,7 +56,16 @@ export class Form {
     }
 
     validateField(field, element) {
-        if (!element.value || !element.value.match(field.regex)) {
+        if (field.name === 'repeat-password') {
+            const passwordField = this.fields.find(item => item.name === 'password');
+            if (!element.value || element.value !== passwordField.element.value) {
+                element.classList.add('is-invalid');
+                field.valid = false;
+            } else {
+                element.classList.remove('is-invalid');
+                field.valid = true;
+            }
+        } else if (!element.value || !element.value.match(field.regex)) {
             element.classList.add('is-invalid');
             field.valid = false;
         } else {
