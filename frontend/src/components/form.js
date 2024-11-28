@@ -1,7 +1,8 @@
 export class Form {
-    constructor() {
+    constructor(page) {
         this.processElement = null;
         this.rememberMeElement = null;
+        this.page = page;
         this.fields = [
             {
                 name: 'email',
@@ -14,10 +15,28 @@ export class Form {
                 name: 'password',
                 id: 'password',
                 element: null,
-                // regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
                 valid: false,
             },
         ];
+
+        if (this.page === 'signup') {
+            this.fields.unshift(
+                {
+                    name: 'name',
+                    id: 'name',
+                    element: null,
+                    regex: /^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+(?:\s[А-ЯЁ][а-яё]+)?$/,
+                    valid: false,
+                },)
+            this.fields.add(
+                {
+                    name: 'repeatPassword',
+                    id: 'repeat-password',
+                    element: null,
+                    valid: false,
+                },)
+        }
 
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
@@ -57,7 +76,7 @@ export class Form {
 
     processForm() {
         if (this.validateForm()) {
-            location.href = '../../index.html';
+            location.href = '#/index';
         }
     };
 }
