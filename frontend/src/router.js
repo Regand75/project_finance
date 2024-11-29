@@ -14,7 +14,7 @@ export class Router {
             {
                 route: '#/',
                 title: 'Главная',
-                template: 'src/templates/pages/index.html',
+                template: 'src/templates/pages/main.html',
                 useLayout: 'src/templates/layout.html',
                 // styles: 'src/styles/index.css',
                 load: () => {
@@ -32,13 +32,13 @@ export class Router {
                 }
             },
             {
-                route: '#/sign-up',
+                route: '#/signup',
                 title: 'Регистрация',
-                template: 'src/templates/pages/auth/sign-up.html',
+                template: 'src/templates/pages/auth/signup.html',
                 useLayout: false,
                 // styles: 'src/styles/index.css',
                 load: () => {
-                    new Form('sign-up');
+                    new Form('signup');
                 }
             },
             {

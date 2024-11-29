@@ -1,3 +1,7 @@
+import {CustomHttp} from "../services/custom-http.js";
+import {Auth} from "../services/auth.js";
+import config from "../../config/config.js";
+
 export class Form {
     constructor(page) {
         this.processElement = null;
@@ -20,19 +24,19 @@ export class Form {
             },
         ];
 
-        if (this.page === 'sign-up') {
+        if (this.page === 'signup') {
             this.fields.unshift(
                 {
-                    name: 'name',
-                    id: 'name',
+                    name: 'fullName',
+                    id: 'fullName',
                     element: null,
                     regex: /^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+(?:\s[А-ЯЁ][а-яё]+)?$/,
                     valid: false,
                 },)
             this.fields.push(
                 {
-                    name: 'repeat-password',
-                    id: 'repeat-password',
+                    name: 'passwordRepeat',
+                    id: 'passwordRepeat',
                     element: null,
                     valid: false,
                 },)
@@ -46,7 +50,7 @@ export class Form {
         });
 
         if (this.page === 'login') {
-            this.rememberMeElement = document.getElementById('remember-me'); // checkbox 'Запомнить меня'
+            this.rememberMeElement = document.getElementById('rememberMe'); // checkbox 'Запомнить меня'
         }
 
         this.processElement = document.getElementById('process-button');
@@ -85,9 +89,62 @@ export class Form {
         return validForm;
     };
 
-    processForm() {
+    extractNameAndLastName(fullName) {
+        const parts = fullName.trim().split(/\s+/); // Разделяем по пробелам
+        const lastName = parts[0] || ''; // Второе слово — фамилия
+        const name = parts[1] || ''; // Первое слово — имя
+        return {name, lastName};
+    }
+
+    async processForm() {
         if (this.validateForm()) {
-            location.href = '#/index';
+            const email = this.fields.find(item => item.name === 'email').element.value;
+            const password = this.fields.find(item => item.name === 'password').element.value;
+            if (this.page === 'signup') {
+
+                // Извлечение имени и фамилии
+                const nameField = this.fields.find(item => item.name === 'fullName');
+                const {name, lastName} = this.extractNameAndLastName(nameField.element.value);
+
+                try {
+                    const result = await CustomHttp.request(config.host + '/signup', 'POST', {
+                        name: name,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                        passwordRepeat: this.fields.find(item => item.name === 'passwordRepeat').element.value,
+                    });
+
+                    if (result) {
+                        if (result.errors || !result.user) {
+                            throw new Error(result.message);
+                        }
+                    }
+                } catch (error) {
+                    return console.log(error);
+                }
+            }
+            try {
+                const result = await CustomHttp.request(config.host + '/login', 'POST', {
+                    email: email,
+                    password: password,
+                });
+
+                if (result) {
+                    if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
+                        throw new Error(result.message);
+                    }
+                    Auth.setToken(result.tokens.accessToken, result.tokens.refreshToken);
+                    Auth.setUserInfo({
+                        name: result.user.name,
+                        lastName: result.user.lastName,
+                        id: result.user.id,
+                    });
+                    location.href = '#/';
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 }
