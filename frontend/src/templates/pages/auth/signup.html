@@ -15,6 +15,9 @@
                 </div>
                 <input type="text" class="form-control text-black" id="fullName"
                        placeholder="ФИО">
+                <div class="invalid-feedback">
+                    Введите ФИО
+                </div>
             </div>
 
             <div class="input-group has-validation">
@@ -27,6 +30,9 @@
                 </div>
                 <input type="email" class="form-control text-black custom-font" id="email"
                        placeholder="Электронная почта">
+                <div class="invalid-feedback">
+                    Введите корректный e-mail
+                </div>
             </div>
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -38,6 +44,9 @@
                 </div>
                 <input type="password" class="form-control text-black custom-font" id="password"
                        placeholder="Пароль">
+                <div class="invalid-feedback">
+                    Пароль должен содержать не менее 8-ми символов и заглавную букву
+                </div>
             </div>
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -49,6 +58,9 @@
                 </div>
                 <input type="password" class="form-control text-black custom-font" id="passwordRepeat"
                        placeholder="Подтверждение пароля">
+                <div class="invalid-feedback" id="passwordRepeatInvalid">
+                    Повторите пароль
+                </div>
             </div>
 
             <button class="form-button btn btn-primary w-100 py-2 fs-15" type="button" id="process-button" disabled>Войти</button>

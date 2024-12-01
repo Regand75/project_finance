@@ -5,6 +5,7 @@
                 <img src="src/static/images/logo.png" alt="Логотип">
             </div>
             <h1 class="form-title title text-center">Вход</h1>
+            <div class="invalid-feedback text-center mb-3" id="common-error">Неправильный email или пароль</div>
 
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -16,6 +17,9 @@
                 </div>
                 <input type="email" class="form-control text-black" id="email"
                        placeholder="Электронная почта">
+                <div class="invalid-feedback">
+                    Введите корректный e-mail
+                </div>
             </div>
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -27,6 +31,9 @@
                 </div>
                 <input type="password" class="form-control text-black" id="password"
                        placeholder="Пароль">
+                <div class="invalid-feedback">
+                    Введите правильный пароль
+                </div>
             </div>
 
             <div class="form-check d-flex align-items-start">

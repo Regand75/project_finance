@@ -1,11 +1,12 @@
-import {CustomHttp} from "../services/custom-http.js";
-import {Auth} from "../services/auth.js";
-import config from "../../config/config.js";
+import {CustomHttp} from "../../services/custom-http.js";
+import config from "../../../config/config.js";
+import {Auth} from "../../services/auth.js";
 
 export class Form {
     constructor(page) {
         this.processElement = null;
         this.rememberMeElement = null;
+        this.commonErrorElement = null;
         this.page = page;
         this.fields = [
             {
@@ -51,6 +52,7 @@ export class Form {
 
         if (this.page === 'login') {
             this.rememberMeElement = document.getElementById('rememberMe'); // checkbox 'Запомнить меня'
+            this.commonErrorElement = document.getElementById('common-error');
         }
 
         this.processElement = document.getElementById('process-button');
@@ -60,12 +62,16 @@ export class Form {
     }
 
     validateField(field, element) {
-        if (field.name === 'repeat-password') {
+        if (field.name === 'passwordRepeat') {
+            const passwordRepeatInvalidElement = document.getElementById('passwordRepeatInvalid');
             const passwordField = this.fields.find(item => item.name === 'password');
             if (!element.value || element.value !== passwordField.element.value) {
+                passwordRepeatInvalidElement.style.display = 'block';
+                passwordRepeatInvalidElement.innerText = "Пароли должны совпадать";
                 element.classList.add('is-invalid');
                 field.valid = false;
             } else {
+                passwordRepeatInvalidElement.style.display = 'none';
                 element.classList.remove('is-invalid');
                 field.valid = true;
             }
@@ -97,11 +103,12 @@ export class Form {
     }
 
     async processForm() {
+        this.commonErrorElement.style.display = 'none';
         if (this.validateForm()) {
             const email = this.fields.find(item => item.name === 'email').element.value;
             const password = this.fields.find(item => item.name === 'password').element.value;
-            if (this.page === 'signup') {
 
+            if (this.page === 'signup') {
                 // Извлечение имени и фамилии
                 const nameField = this.fields.find(item => item.name === 'fullName');
                 const {name, lastName} = this.extractNameAndLastName(nameField.element.value);
@@ -125,10 +132,16 @@ export class Form {
                 }
             }
             try {
-                const result = await CustomHttp.request(config.host + '/login', 'POST', {
+                const body = {
                     email: email,
                     password: password,
-                });
+                    rememberMe: false,
+                };
+                if (this.rememberMeElement && this.rememberMeElement.checked) {
+                    body.rememberMe = true;
+                }
+
+                const result = await CustomHttp.request(config.host + '/login', 'POST', body);
 
                 if (result) {
                     if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
@@ -146,6 +159,7 @@ export class Form {
                 console.log(error);
             }
         }
+        this.commonErrorElement.style.display = 'block';
     };
 }
 

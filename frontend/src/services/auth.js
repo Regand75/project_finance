@@ -21,7 +21,7 @@ export class Auth {
             if (response && response.status === 200) {
                 const result = await response.json();
                 if (result && !result.error) {
-                    this.setToken(result.accessToken, result.refreshToken);
+                    this.setToken(result.tokens.accessToken, result.tokens.refreshToken);
                     return true;
                 }
             }
@@ -30,6 +30,30 @@ export class Auth {
         location.href = '#/login';
         return false;
     }
+
+    // static async logout() {
+    //     const refreshToken = localStorage.getItem(this.refreshTokenKey);
+    //     if (refreshToken) {
+    //         const response = await fetch(config.host + '/logout', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Accept': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 refreshToken: refreshToken,
+    //             })
+    //         });
+    //         if (response && response.status === 200) {
+    //             const result = await response.json();
+    //             if (result && !result.error) {
+    //                 Auth.removeToken();
+    //                 localStorage.removeItem(Auth.userInfoKey);
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    // };
 
     static setToken(accessToken, refreshToken) {
         localStorage.setItem(this.accessTokenKey, accessToken);
