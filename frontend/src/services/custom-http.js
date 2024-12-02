@@ -23,10 +23,14 @@ export class CustomHttp {
                 if (result) {
                     return await this.request(url, method, body);
                 } else {
-                    return null;
+                    return await response.json(); // Считываем JSON
+                    // throw new Error(JSON.stringify(errorData)); // Возвращаем JSON-строку
+                    // return null;
                 }
             }
-            throw new Error(response.message);
+            return await response.json(); // Считываем JSON
+            // throw new Error(JSON.stringify(errorData)); // Возвращаем JSON-строку
+            // throw new Error(response.message);
         }
         return await response.json();
     }

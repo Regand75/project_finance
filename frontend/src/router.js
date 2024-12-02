@@ -2,9 +2,10 @@ import {Main} from "./components/main.js";
 import {Incomes} from "./components/incomes.js";
 import {Expenses} from "./components/expenses.js";
 import {IncomesExpense} from "./components/incomes-expenses.js";
-import {Form} from "./components/auth/form.js";
 import {Auth} from "./services/auth.js";
 import {Logout} from "./components/auth/logout.js";
+import {Login} from "./components/auth/login.js";
+import {Signup} from "./components/auth/signup.js";
 
 export class Router {
     constructor() {
@@ -33,7 +34,7 @@ export class Router {
                 template: 'src/templates/pages/auth/login.html',
                 useLayout: false,
                 load: () => {
-                    new Form('login');
+                    new Login();
                 },
                 styles: [
                     'auth.css',
@@ -45,7 +46,7 @@ export class Router {
                 template: 'src/templates/pages/auth/signup.html',
                 useLayout: false,
                 load: () => {
-                    new Form('signup');
+                    new Signup();
                 },
                 styles: [
                     'auth.css',
