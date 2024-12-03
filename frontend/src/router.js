@@ -265,14 +265,31 @@ export class Router {
         }
     }
     activateMenuItem(route) {
-        document.querySelectorAll('.sidebar-menu .nav-link').forEach(link => {
+        const targetElement= document.getElementById('target');
+        const activeBlockElement= document.getElementById('active-block');
+        const listElement = document.getElementById('dashboard-collapse');
+        const collapsedSvgElement = document.getElementById('collapsed-svg');
+        document.querySelectorAll('.nav-link').forEach(link => {
             const href = link.getAttribute('href');
-            if ((route.route.includes(href) && href !== '#/') || (route.route === "#/" && href === '#/')) {
+            if ((route.route === href && href !== '#/') || (route.route === "#/" && href === '#/')) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
             }
-        })
+        });
+        if (route.route === '#/incomes' || route.route === '#/expenses') {
+            targetElement.classList.add('active');
+            activeBlockElement.classList.add('active-block');
+            targetElement.classList.remove('collapsed');
+            listElement.classList.add('show');
+            collapsedSvgElement.classList.add('collapsed');
+        } else {
+            targetElement.classList.remove('active');
+            activeBlockElement.classList.remove('active-block');
+            targetElement.classList.add('collapsed');
+            listElement.classList.remove('show');
+            collapsedSvgElement.classList.remove('collapsed');
+        }
     }
 
     showLogout() {

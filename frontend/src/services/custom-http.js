@@ -18,19 +18,19 @@ export class CustomHttp {
         }
         const response = await fetch(url, params);
         if (response.status < 200 || response.status >= 300) {
+            if (!response.ok) {
+                const errorData = await response.json(); // Считываем тело ответа
+                throw new Error(JSON.stringify(errorData)); // Передаем ошибку дальше
+            }
             if (response.status === 401) {
                 const result = await Auth.processUnauthorizedResponse();
                 if (result) {
                     return await this.request(url, method, body);
                 } else {
                     return await response.json(); // Считываем JSON
-                    // throw new Error(JSON.stringify(errorData)); // Возвращаем JSON-строку
-                    // return null;
                 }
             }
             return await response.json(); // Считываем JSON
-            // throw new Error(JSON.stringify(errorData)); // Возвращаем JSON-строку
-            // throw new Error(response.message);
         }
         return await response.json();
     }

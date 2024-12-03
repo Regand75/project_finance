@@ -73,7 +73,6 @@ export class Login {
                 });
                 if (result) {
                     if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
-                        this.commonErrorElement.style.display = 'block';
                         throw new Error(result.message);
                     }
                     Auth.setToken(result.tokens.accessToken, result.tokens.refreshToken);
@@ -88,6 +87,7 @@ export class Login {
                 console.log(error);
             }
         }
+        this.commonErrorElement.style.display = 'block';
     };
 }
 
