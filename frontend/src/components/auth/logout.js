@@ -1,12 +1,28 @@
+import {CustomHttp} from "../../services/custom-http.js";
+import config from "../../../config/config.js";
+import {Auth} from "../../services/auth.js";
+
 export class Logout {
     constructor() {
-        // this.userIconElement = document.getElementById("user-icon");
-        // this.dropdownMenuElement = document.getElementById("dropdown-menu");
-        //
-        // this.userIconElement.addEventListener('click', this.showLogout.bind(this));
+        if (!localStorage.getItem('accessToken') || !localStorage.getItem('refreshToken')) {
+            return location.href = '#/login';
+        }
+        this.logout().then();
     }
 
-    // showLogout() {
-    //     this.dropdownMenuElement.classList.toggle('show');
-    // }
+    async logout() {
+        const refreshToken = localStorage.getItem(Auth.refreshTokenKey);
+        if (refreshToken) {
+            const result = await CustomHttp.request(config.host + '/logout', 'POST', {
+                refreshToken: refreshToken,
+            });
+            console.log(result);
+            Auth.removeToken();
+            Auth.removeUserInfo();
+            window.location.href = '#/login';
+        } else {
+            Auth.removeUserInfo();
+            window.location.href = '#/login';
+        }
+    }
 }

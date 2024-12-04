@@ -1,5 +1,9 @@
 export class Main {
     constructor() {
+        if (!localStorage.getItem('accessToken')) {
+            return location.href = '#/login';
+        }
+
         this.dataIncomes = {
             labels: ['Депозиты', 'Зарплата', 'Сбережения', 'Инвестиции'],
             datasets: [

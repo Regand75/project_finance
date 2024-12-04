@@ -4,14 +4,17 @@ import {Expenses} from "./components/expenses.js";
 import {IncomesExpense} from "./components/incomes-expenses.js";
 import {Auth} from "./services/auth.js";
 import {Logout} from "./components/auth/logout.js";
-import {Login} from "./components/auth/login.js";
-import {Signup} from "./components/auth/signup.js";
+import {Form} from "./components/auth/form.js";
 
 export class Router {
     constructor() {
         this.titlePageElement = document.getElementById('title');
         this.contentPageElement = document.getElementById('content');
-        this.styleElement = document.getElementById('styles');
+        this.toggleElement = null;
+        this.activeBlockElement = null;
+        this.listElement = null;
+        this.collapsedSvgElement = null;
+        this.currentRoute = '#/login';
         this.initEvents();
         this.routes = [
             {
@@ -34,7 +37,7 @@ export class Router {
                 template: 'src/templates/pages/auth/login.html',
                 useLayout: false,
                 load: () => {
-                    new Login();
+                    new Form('login');
                 },
                 styles: [
                     'auth.css',
@@ -46,7 +49,7 @@ export class Router {
                 template: 'src/templates/pages/auth/signup.html',
                 useLayout: false,
                 load: () => {
-                    new Signup();
+                    new Form('signup');
                 },
                 styles: [
                     'auth.css',
@@ -193,62 +196,63 @@ export class Router {
     }
 
     async activateRoute() {
-        // const oldRoute = window.location.hash.split('?')[0]; // получаем текущий путь URL из адресной строки
-        // if (oldRoute) {
-        //     const currentRoute = this.routes.find(item => item.route === oldRoute); // берем старый route
-        //     if (currentRoute.styles && currentRoute.styles.length > 0) {
-        //         // находим и удаляем старые стили
-        //         currentRoute.styles.forEach(style => {
-        //             const linkElement = document.querySelector(`link[href='src/styles/${style}']`);
-        //             if (linkElement) {
-        //                 linkElement.remove();
-        //             }
-        //         });
-        //     }
-        // }
+        const previousRoute = this.currentRoute; // Сохраняем предыдущий маршрут
+        this.currentRoute = window.location.hash; // Обновляем текущий маршрут
+        // Находим объект маршрута для предыдущего
+        const previousRouteObject = this.routes.find(route => route.route === previousRoute);
+        if (previousRouteObject.styles && previousRouteObject.styles.length > 0) {
+            // находим и удаляем старые стили
+            previousRouteObject.styles.forEach(style => {
+                const linkElement = document.querySelector(`link[href='src/styles/${style}']`);
+                if (linkElement) {
+                    linkElement.remove();
+                }
+            });
+        }
 
         const newRoute = this.routes.find(item => {
             return item.route === window.location.hash;
         });
 
         if (newRoute) {
-            const urlRoute = window.location.hash.split('?')[0];
-            if (urlRoute === '#/logout') {
-                Auth.removeToken();
-                localStorage.removeItem(Auth.userInfoKey);
-                window.location.href = '#/login';
-                return;
-            }
-
             if (newRoute.title) {
                 this.titlePageElement.innerText = newRoute.title;
             }
 
-            // if (newRoute.styles && newRoute.styles.length > 0) {
-            //     newRoute.styles.forEach(style => {
-            //         const link = document.createElement('link');
-            //         link.rel = 'stylesheet';
-            //         link.href = `src/styles/${style}`;
-            //         document.head.appendChild(link);
-            //     });
-            // }
+            if (newRoute.styles && newRoute.styles.length > 0) {
+                newRoute.styles.forEach(style => {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = `src/styles/${style}`;
+                    document.head.appendChild(link);
+                });
+            }
 
             if (newRoute.template) {
                 let contentBlock = this.contentPageElement;
                 this.contentPageElement.classList.remove('content-center-auth');
+
                 if (newRoute.useLayout) {
                     this.contentPageElement.innerHTML = await fetch(newRoute.useLayout).then(response => response.text());
                     contentBlock = document.getElementById('content-layout');
-
                     this.profileUserElement = document.getElementById('profile-user');
                     const userInfo = Auth.getUserInfo();
+
                     if (userInfo && userInfo.name && userInfo.lastName) {
                         this.profileUserElement.innerText = `${userInfo.name} ${userInfo.lastName}`;
                     }
 
+                    this.burgerElement = document.getElementById("burger");
+                    this.sidebarElement = document.getElementById("sidebar");
+                    this.toggleElement = document.getElementById('toggle');
+                    this.activeBlockElement = document.getElementById('active-block');
+                    this.listElement = document.getElementById('dashboard-collapse');
+                    this.collapsedSvgElement = document.getElementById('collapsed-svg');
                     this.userIconElement = document.getElementById("user-icon");
                     this.dropdownMenuElement = document.getElementById("dropdown-menu");
                     this.userIconElement.addEventListener('click', this.showLogout.bind(this));
+
+                    this.burgerElement.addEventListener('click', this.showSidebar.bind(this));
 
                     this.activateMenuItem(newRoute);
                 } else {
@@ -260,15 +264,12 @@ export class Router {
                 newRoute.load();
             }
         } else {
-            window.location = '#/';
+            window.location = '#/login';
             console.log('No route found');
         }
     }
+
     activateMenuItem(route) {
-        const targetElement= document.getElementById('target');
-        const activeBlockElement= document.getElementById('active-block');
-        const listElement = document.getElementById('dashboard-collapse');
-        const collapsedSvgElement = document.getElementById('collapsed-svg');
         document.querySelectorAll('.nav-link').forEach(link => {
             const href = link.getAttribute('href');
             if ((route.route === href && href !== '#/') || (route.route === "#/" && href === '#/')) {
@@ -278,18 +279,25 @@ export class Router {
             }
         });
         if (route.route === '#/incomes' || route.route === '#/expenses') {
-            targetElement.classList.add('active');
-            activeBlockElement.classList.add('active-block');
-            targetElement.classList.remove('collapsed');
-            listElement.classList.add('show');
-            collapsedSvgElement.classList.add('collapsed');
+            this.toggleElement.classList.add('active');
+            this.activeBlockElement.classList.add('active-block');
+            this.toggleElement.classList.remove('collapsed');
+            this.listElement.classList.add('show');
+            this.collapsedSvgElement.classList.add('collapsed');
         } else {
-            targetElement.classList.remove('active');
-            activeBlockElement.classList.remove('active-block');
-            targetElement.classList.add('collapsed');
-            listElement.classList.remove('show');
-            collapsedSvgElement.classList.remove('collapsed');
+            this.toggleElement.classList.remove('active');
+            this.activeBlockElement.classList.remove('active-block');
+            this.toggleElement.classList.add('collapsed');
+            this.listElement.classList.remove('show');
+            this.collapsedSvgElement.classList.remove('collapsed');
         }
+    }
+
+    showSidebar() {
+        this.sidebarElement.classList.toggle("d-none");
+        this.sidebarElement.classList.toggle("d-flex");
+        this.sidebarElement.classList.toggle("sidebar-background");
+        this.burgerElement.classList.toggle("burger-margin");
     }
 
     showLogout() {

@@ -4,9 +4,11 @@ import {Auth} from "../../services/auth.js";
 
 export class Form {
     constructor(page) {
-        this.processElement = null;
-        this.rememberMeElement = null;
-        this.commonErrorElement = null;
+        if (localStorage.getItem('accessToken')) {
+            return location.href = '#/';
+        }
+        this.commonErrorElement = document.getElementById('common-error');
+        this.processElement = document.getElementById('process-button');
         this.page = page;
         this.fields = [
             {
@@ -51,14 +53,10 @@ export class Form {
         });
 
         if (this.page === 'login') {
-            this.rememberMeElement = document.getElementById('rememberMe'); // checkbox 'Запомнить меня'
-            this.commonErrorElement = document.getElementById('common-error');
+            this.rememberMeElement = document.getElementById('rememberMe');
         }
 
-        this.processElement = document.getElementById('process-button');
-        this.processElement.onclick = () => {
-            this.processForm();
-        }
+        this.processElement.addEventListener('click', this.processForm.bind(this));
     }
 
     validateField(field, element) {
@@ -124,6 +122,7 @@ export class Form {
 
                     if (result) {
                         if (result.errors || !result.user) {
+                            this.commonErrorElement.style.display = 'block';
                             throw new Error(result.message);
                         }
                     }
@@ -145,6 +144,7 @@ export class Form {
 
                 if (result) {
                     if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
+                        this.commonErrorElement.style.display = 'block';
                         throw new Error(result.message);
                     }
                     Auth.setToken(result.tokens.accessToken, result.tokens.refreshToken);
@@ -159,7 +159,6 @@ export class Form {
                 console.log(error);
             }
         }
-        this.commonErrorElement.style.display = 'block';
     };
 }
 

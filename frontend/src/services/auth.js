@@ -27,33 +27,12 @@ export class Auth {
             }
         }
         this.removeToken();
-        location.href = '#/login';
+        this.removeUserInfo();
+        if (window.location.hash !== '#/login') {
+            location.href = '#/login';
+        }
         return false;
     }
-
-    static async logout() {
-        const refreshToken = localStorage.getItem(this.refreshTokenKey);
-        if (refreshToken) {
-            const response = await fetch(config.host + '/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({
-                    refreshToken: refreshToken,
-                })
-            });
-            if (response && response.status === 200) {
-                const result = await response.json();
-                if (result && !result.error) {
-                    Auth.removeToken();
-                    localStorage.removeItem(Auth.userInfoKey);
-                    return true;
-                }
-            }
-        }
-    };
 
     static setToken(accessToken, refreshToken) {
         localStorage.setItem(this.accessTokenKey, accessToken);
@@ -72,5 +51,9 @@ export class Auth {
     static getUserInfo() {
         const userInfo = localStorage.getItem(this.userInfoKey);
         return userInfo ? JSON.parse(userInfo) : null;
+    }
+
+    static removeUserInfo() {
+        localStorage.removeItem(this.userInfoKey);
     }
 }
