@@ -1,24 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/auth.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>
-</head>
-<body class="d-flex min-vh-100">
-
 <section class="form-signin w-100 m-auto">
     <div class="container">
         <form>
             <div class="form-logo text-center">
-                <img src="../static/images/logo.png" alt="Логотип">
+                <img src="src/static/images/logo.png" alt="Логотип">
             </div>
             <h1 class="form-title title text-center">Создайте аккаунт</h1>
+            <div class="invalid-feedback text-center mb-3" id="common-error">Пользователь с таким адресом уже существует</div>
 
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -27,8 +14,11 @@
                               fill="#6C757D"/>
                     </svg>
                 </div>
-                <input type="text" class="form-control text-black is-invalid" id="name"
+                <input type="text" class="form-control text-black" id="fullName"
                        placeholder="ФИО">
+                <div class="invalid-feedback">
+                    Введите ФИО
+                </div>
             </div>
 
             <div class="input-group has-validation">
@@ -41,6 +31,9 @@
                 </div>
                 <input type="email" class="form-control text-black custom-font" id="email"
                        placeholder="Электронная почта">
+                <div class="invalid-feedback">
+                    Введите корректный e-mail
+                </div>
             </div>
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -52,6 +45,9 @@
                 </div>
                 <input type="password" class="form-control text-black custom-font" id="password"
                        placeholder="Пароль">
+                <div class="invalid-feedback">
+                    Пароль должен содержать не менее 8-ми символов и заглавную букву
+                </div>
             </div>
             <div class="input-group has-validation">
                 <div class="input-group-text bg-light">
@@ -61,19 +57,19 @@
                               fill="#6C757D"/>
                     </svg>
                 </div>
-                <input type="password" class="form-control text-black custom-font" id="repeat-password"
+                <input type="password" class="form-control text-black custom-font" id="passwordRepeat"
                        placeholder="Подтверждение пароля">
+                <div class="invalid-feedback" id="passwordRepeatInvalid">
+                    Повторите пароль
+                </div>
             </div>
 
-            <button class="form-button btn btn-primary w-100 py-2 fs-15" type="button" id="process-button">Войти</button>
+            <button class="form-button btn btn-primary w-100 py-2 fs-15" type="button" id="process-button" disabled>Войти</button>
             <div class="form-text-block">
                 <p class="form-text text-black fs-12 my-0">
-                    Уже есть аккаунт?<a class="form-link text-primary ps-2" href="login.html">Войтите в систему</a>
+                    Уже есть аккаунт?<a class="form-link text-primary ps-2" href="#/login">Войтите в систему</a>
                 </p>
             </div>
         </form>
     </div>
 </section>
-
-</body>
-</html>
