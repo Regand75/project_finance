@@ -1,12 +1,12 @@
-import {ModalManager} from "./modal.js";
+import {ModalManager} from "../modal.js";
 
-export class Incomes {
+export class IncomesExpense {
     constructor() {
         this.buttonNoDeleteElement = document.getElementById("no-delete");
-        this.buttonDeleteIncomeElements = document.querySelectorAll('.income-delete');
+        this.buttonDeleteIncomeExpenseElement = document.querySelectorAll(".operations-delete");
 
-        if (this.buttonDeleteIncomeElements) {
-            this.buttonDeleteIncomeElements.forEach(button => {
+        if (this.buttonDeleteIncomeExpenseElement) {
+            this.buttonDeleteIncomeExpenseElement.forEach(button => {
                 button.addEventListener('click', ModalManager.showModal);
             });
         }

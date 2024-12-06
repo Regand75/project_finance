@@ -1,7 +1,7 @@
 import {Main} from "./components/main.js";
-import {Incomes} from "./components/incomes.js";
-import {Expenses} from "./components/expenses.js";
-import {IncomesExpense} from "./components/incomes-expenses.js";
+import {Incomes} from "./components/incomes/incomes.js";
+import {Expenses} from "./components/expenses/expenses.js";
+import {IncomesExpense} from "./components/operations/operations-list.js";
 import {Auth} from "./services/auth.js";
 import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
@@ -62,9 +62,9 @@ export class Router {
                 }
             },
             {
-                route: '#/incomes-expenses',
+                route: '#/operations',
                 title: 'Доходы и расходы',
-                template: 'src/templates/pages/incomes-expenses/incomes-expenses.html',
+                template: 'src/templates/pages/operations/list.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new IncomesExpense();
@@ -76,9 +76,9 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes-expenses/edit',
+                route: '#/operations/edit',
                 title: 'Доходы и расходы',
-                template: 'src/templates/pages/incomes-expenses/edit.html',
+                template: 'src/templates/pages/operations/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new IncomesExpense();
@@ -90,9 +90,9 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes-expenses/creating',
+                route: '#/operations/creating',
                 title: 'Доходы и расходы',
-                template: 'src/templates/pages/incomes-expenses/creating.html',
+                template: 'src/templates/pages/operations/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new IncomesExpense(t);

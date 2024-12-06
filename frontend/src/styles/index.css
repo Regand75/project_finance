@@ -74,20 +74,20 @@
 .edit-income-active,
 .creating-expense-active,
 .edit-expense-active,
-.incomes-expenses-active {
+.operations-active {
     gap: 10px;
 }
 
-.incomes-expenses-active {
+.operations-active {
     margin-bottom: 40px;
 }
 
-.incomes-expenses-filter {
+.operations-filter {
     margin-bottom: 40px;
     gap: 20px;
 }
 
-.incomes-expense-filter-block:has(button) {
+.operations-filter-block:has(button) {
     width: 100px;
 }
 
