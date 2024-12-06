@@ -1,7 +1,7 @@
 import {Main} from "./components/main.js";
 import {Incomes} from "./components/incomes/incomes.js";
 import {Expenses} from "./components/expenses/expenses.js";
-import {IncomesExpense} from "./components/operations/operations-list.js";
+import {OperationsList} from "./components/operations/operations-list.js";
 import {Auth} from "./services/auth.js";
 import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
@@ -67,7 +67,7 @@ export class Router {
                 template: 'src/templates/pages/operations/list.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomesExpense();
+                    new OperationsList();
                 },
                 styles: [
                     'layout.css',
@@ -81,7 +81,7 @@ export class Router {
                 template: 'src/templates/pages/operations/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomesExpense();
+
                 },
                 styles: [
                     'layout.css',
@@ -95,7 +95,7 @@ export class Router {
                 template: 'src/templates/pages/operations/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomesExpense(t);
+
                 },
                 styles: [
                     'layout.css',
@@ -272,25 +272,25 @@ export class Router {
     activateMenuItem(route) {
         document.querySelectorAll('.nav-link').forEach(link => {
             const href = link.getAttribute('href');
-            if ((route.route === href && href !== '#/') || (route.route === "#/" && href === '#/')) {
+            if ((route.route.includes(href) && href !== '#/') || (route.route === "#/" && href === '#/')) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
             }
+            if (route.route.includes('#/incomes') || route.route.includes('#/expenses')) {
+                this.toggleElement.classList.add('active');
+                this.activeBlockElement.classList.add('active-block');
+                this.toggleElement.classList.remove('collapsed');
+                this.listElement.classList.add('show');
+                this.collapsedSvgElement.classList.add('collapsed');
+            } else {
+                this.toggleElement.classList.remove('active');
+                this.activeBlockElement.classList.remove('active-block');
+                this.toggleElement.classList.add('collapsed');
+                this.listElement.classList.remove('show');
+                this.collapsedSvgElement.classList.remove('collapsed');
+            }
         });
-        if (route.route === '#/incomes' || route.route === '#/expenses') {
-            this.toggleElement.classList.add('active');
-            this.activeBlockElement.classList.add('active-block');
-            this.toggleElement.classList.remove('collapsed');
-            this.listElement.classList.add('show');
-            this.collapsedSvgElement.classList.add('collapsed');
-        } else {
-            this.toggleElement.classList.remove('active');
-            this.activeBlockElement.classList.remove('active-block');
-            this.toggleElement.classList.add('collapsed');
-            this.listElement.classList.remove('show');
-            this.collapsedSvgElement.classList.remove('collapsed');
-        }
     }
 
     showSidebar() {

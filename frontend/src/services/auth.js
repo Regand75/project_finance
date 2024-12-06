@@ -6,6 +6,7 @@ export class Auth {
     static userInfoKey = 'userInfo';
 
     static async processUnauthorizedResponse() {
+        let result = false;
         const refreshToken = localStorage.getItem(this.refreshTokenKey);
         if (refreshToken) {
             const response = await fetch(config.host + '/refresh', {
@@ -19,19 +20,22 @@ export class Auth {
                 }),
             });
             if (response && response.status === 200) {
-                const result = await response.json();
-                if (result && !result.error) {
-                    this.setToken(result.tokens.accessToken, result.tokens.refreshToken);
-                    return true;
+                const token = await response.json();
+                if (token && !token.error) {
+                    this.setToken(token.tokens.accessToken, token.tokens.refreshToken);
+                    result = true;
                 }
             }
         }
-        this.removeToken();
-        this.removeUserInfo();
-        if (window.location.hash !== '#/login') {
-            location.href = '#/login';
+        if (!result) {
+            this.removeToken();
+            this.removeUserInfo();
+            if (window.location.hash !== '#/login') {
+                location.href = '#/login';
+            }
         }
-        return false;
+
+        return result;
     }
 
     static setToken(accessToken, refreshToken) {
