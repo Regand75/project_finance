@@ -32,6 +32,11 @@
     transform: rotate(90deg);
 }
 
+.active-block {
+    border: 1px solid #0D6EFD;
+    border-radius: 6px;
+}
+
 .path-svg {
     margin-left: 72px;
 }
