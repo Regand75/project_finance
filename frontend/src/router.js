@@ -2,7 +2,7 @@ import {Main} from "./components/main.js";
 import {Incomes} from "./components/incomes/incomes.js";
 import {Expenses} from "./components/expenses/expenses.js";
 import {OperationsList} from "./components/operations/operations-list.js";
-import {Auth} from "./services/auth.js";
+import {AuthUtils} from "./utils/auth-utils.js";
 import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
 
@@ -236,7 +236,7 @@ export class Router {
                     this.contentPageElement.innerHTML = await fetch(newRoute.useLayout).then(response => response.text());
                     contentBlock = document.getElementById('content-layout');
                     this.profileUserElement = document.getElementById('profile-user');
-                    const userInfo = Auth.getUserInfo();
+                    const userInfo = AuthUtils.getUserInfo();
 
                     if (userInfo && userInfo.name && userInfo.lastName) {
                         this.profileUserElement.innerText = `${userInfo.name} ${userInfo.lastName}`;

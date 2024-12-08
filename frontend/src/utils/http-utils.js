@@ -1,7 +1,7 @@
-import {Auth} from "./auth.js";
+import {AuthUtils} from "./auth-utils.js";
 
-export class CustomHttp {
-    static async request(url, method = 'GET', body = null) {
+export class HttpUtils {
+    static async request(url, method = 'GET', body = null, retries = 1) {
         const params = {
             method: method,
             headers: {
@@ -9,19 +9,19 @@ export class CustomHttp {
                 'Accept': 'application/json',
             },
         };
-        let token = localStorage.getItem(Auth.accessTokenKey);
+        let token = localStorage.getItem(AuthUtils.accessTokenKey);
         if (token) {
-            params.headers['x-access-token'] = token;
+            params.headers['x-auth-token'] = token;
         }
         if (body) {
             params.body = JSON.stringify(body);
         }
         const response = await fetch(url, params);
         if (response.status < 200 || response.status >= 300) {
-            if (response.status === 401) {
-                const result = await Auth.processUnauthorizedResponse();
+            if (response.status === 401 && retries > 0) {
+                const result = await AuthUtils.processUnauthorizedResponse();
                 if (result) {
-                    return await this.request(url, method, body);
+                    return await this.request(url, method, body, retries - 1);
                 } else {
                     return await response.json();
                 }

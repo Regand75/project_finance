@@ -1,6 +1,6 @@
 import config from "../../config/config.js";
 
-export class Auth {
+export class AuthUtils {
     static accessTokenKey = 'accessToken';
     static refreshTokenKey = 'refreshToken';
     static userInfoKey = 'userInfo';
@@ -25,6 +25,8 @@ export class Auth {
                     this.setToken(token.tokens.accessToken, token.tokens.refreshToken);
                     result = true;
                 }
+            } else {
+                console.error('Не удалось обновить токен:', response.status);
             }
         }
         if (!result) {

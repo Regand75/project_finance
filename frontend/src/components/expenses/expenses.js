@@ -1,5 +1,5 @@
 import {ModalManager} from "../modal.js";
-import {OperationsService} from "../../services/operations-service.js";
+import {OperationsUtils} from "../../utils/operations-utils.js";
 
 export class Expenses {
     constructor() {
@@ -18,7 +18,7 @@ export class Expenses {
         }
 
         if (this.buttonSaveExpenseElement) {
-            this.buttonSaveExpenseElement.addEventListener('click', OperationsService.saveOperation);
+            this.buttonSaveExpenseElement.addEventListener('click', OperationsUtils.saveOperation);
         }
     }
 
