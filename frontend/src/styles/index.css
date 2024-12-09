@@ -87,6 +87,10 @@
     gap: 20px;
 }
 
+.filter-button:not(.btn-secondary):hover {
+    background-color: #6C757D10;
+}
+
 .operations-filter-block:has(button) {
     width: 100px;
 }
