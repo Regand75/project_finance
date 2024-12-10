@@ -73,6 +73,25 @@ a {
     border-color: #ced4da;
 }
 
+.filter-block input {
+    width: 100px;
+    text-align: center;
+    border: none;
+}
+
+.filter-interval-hidden {
+    display: none !important;
+}
+
+.filter-block input:hover {
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-block input:focus {
+    outline: none;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;

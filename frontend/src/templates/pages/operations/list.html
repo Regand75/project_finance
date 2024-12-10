@@ -32,7 +32,8 @@
                     </button>
                 </div>
                 <div class="operations-filter-block">
-                    <button class="filter-button btn border-secondary w-100" type="button" id="operations-button-all" data-period="all">
+                    <button class="filter-button btn border-secondary w-100" type="button" id="operations-button-all"
+                            data-period="all">
                         Все
                     </button>
                 </div>
@@ -42,17 +43,19 @@
                         Интервал
                     </button>
                 </div>
-                <div class="operations-filter-block">
-                    <span>с</span>
-                </div>
-                <div class="operations-filter-block">
-                    <input type="text" name="date-from" placeholder="Дата" id="date-from">
-                </div>
-                <div class="operations-filter-block">
-                    <span>по</span>
-                </div>
-                <div class="operations-filter-block">
-                    <input type="text" name="date-by" placeholder="Дата" id="date-by">
+                <div class="d-flex filter-interval-hidden" id="filter-block">
+                    <div class="operations-filter-block">
+                        <span>с</span>
+                    </div>
+                    <div class="operations-filter-block filter-block me-2">
+                        <input type="text" name="date-from" placeholder="Дата" id="date-from">
+                    </div>
+                    <div class="operations-filter-block">
+                        <span>по</span>
+                    </div>
+                    <div class="operations-filter-block filter-block">
+                        <input type="text" name="date-to" placeholder="Дата" id="date-to">
+                    </div>
                 </div>
             </div>
             <div class="operations-table mx-xl-5 table-responsive">

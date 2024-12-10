@@ -1,4 +1,5 @@
-export class OperationsUtils {
+export class CommonUtils {
+
     static saveOperation() {
         location.href = '#/operations/edit';
     }
@@ -22,4 +23,5 @@ export class OperationsUtils {
                     </a>
                 </div>`;
     }
+
 }

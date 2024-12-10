@@ -10,21 +10,25 @@
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-week" data-period="week">
+                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-week"
+                        data-period="week">
                     Неделя
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-mouth" data-period="mouth">
+                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-mouth"
+                        data-period="mouth">
                     Месяц
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-year" data-period="year">Год
+                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-year"
+                        data-period="year">Год
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-all" data-period="all">Все
+                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-all"
+                        data-period="all">Все
                 </button>
             </div>
             <div class="main-filter-block">
@@ -33,17 +37,19 @@
                     Интервал
                 </button>
             </div>
-            <div class="main-filter-block">
-                <span>с</span>
-            </div>
-            <div class="main-filter-block">
-                <span>16.11.2024</span>
-            </div>
-            <div class="main-filter-block">
-                <span>по</span>
-            </div>
-            <div class="main-filter-block">
-                <span>30.11.2024</span>
+            <div class="d-flex filter-interval-hidden" id="filter-block">
+                <div class="main-filter-block">
+                    <span>с</span>
+                </div>
+                <div class="main-filter-block filter-block">
+                    <input type="text" name="date-from" placeholder="Дата" id="date-from">
+                </div>
+                <div class="main-filter-block">
+                    <span>по</span>
+                </div>
+                <div class="main-filter-block filter-block">
+                    <input type="text" name="date-to" placeholder="Дата" id="date-to">
+                </div>
             </div>
         </div>
         <div class="main-charts d-flex">

@@ -1,6 +1,7 @@
 import {ModalManager} from "../modal.js";
 import {OperationsService} from "../../services/operations-service.js";
-import {OperationsUtils} from "../../utils/operations-utils.js";
+import {FilterUtils} from "../../utils/filter-utils.js";
+import {CommonUtils} from "../../utils/common-utils.js";
 
 export class OperationsList {
     constructor() {
@@ -8,28 +9,17 @@ export class OperationsList {
         this.recordsElement = document.getElementById('records');
         this.filtersContainer = document.getElementById('filters-container'); // Родительский контейнер кнопок фильтра
 
-        if (this.filtersContainer) {
-            this.filtersContainer.addEventListener('click', this.handleFilterClick.bind(this));
-        }
+        this.filtersContainer.addEventListener('click', event =>
+            FilterUtils.handleFilterClick(event, this.showRecords.bind(this))
+        );
 
         if (this.buttonNoDeleteElement) {
             this.buttonNoDeleteElement.addEventListener('click', ModalManager.hideModal);
         }
         this.getOperations('today').then();
 
-        $('#date-from').datepicker({
-           format: 'dd.mm.yyyy',
-           autoclose: 'off',
-           todayHighlight: true,
-           language: 'ru',
-        });
-
-        $('#date-by').datepicker({
-           format: 'dd.mm.yyyy',
-           autoclose: 'off',
-           todayHighlight: true,
-           language: 'ru',
-        });
+        // Инициализация datepicker
+        FilterUtils.initializeDatepickers();
     }
 
     async getOperations(period) {
@@ -38,23 +28,6 @@ export class OperationsList {
             this.showRecords(operationsResult);
         } catch (error) {
             console.error(error);
-        }
-    }
-
-    async handleFilterClick(event) {
-        const target = event.target.closest('button[data-period]');
-        if (target) {
-            document.querySelectorAll('button[data-period]').forEach(btn => btn.classList.remove('btn-secondary'));
-            target.classList.add('btn-secondary');
-            const period = target.getAttribute('data-period'); // Получаем значение фильтра
-
-            try {
-                const operationsResult = await OperationsService.getOperations(`?period=${period}`);
-                // Передаем данные для отображения записей
-                this.showRecords(operationsResult);
-            } catch (error) {
-                console.error(error);
-            }
         }
     }
 
@@ -93,7 +66,7 @@ export class OperationsList {
         <td>${formattedDate}</td>
         <td>${operation.comment}</td>
         <td class="text-nowrap">
-            ${OperationsUtils.generateGridToolsColumn('operations', operation.id)}
+            ${CommonUtils.generateGridToolsColumn('operations', operation.id)}
         </td>
     `;
         return tr;

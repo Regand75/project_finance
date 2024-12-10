@@ -1,5 +1,5 @@
 import {ModalManager} from "../modal.js";
-import {OperationsUtils} from "../../utils/operations-utils.js";
+import {CommonUtils} from "../../utils/common-utils.js";
 
 export class Expenses {
     constructor() {
@@ -18,7 +18,7 @@ export class Expenses {
         }
 
         if (this.buttonSaveExpenseElement) {
-            this.buttonSaveExpenseElement.addEventListener('click', OperationsUtils.saveOperation);
+            this.buttonSaveExpenseElement.addEventListener('click', CommonUtils.saveOperation);
         }
     }
 
