@@ -144,7 +144,7 @@ export class Form {
                         lastName: loginResult.user.lastName,
                         id: loginResult.user.id,
                     });
-                    location.href = '#/';
+                    location.href = '#/operations/creating';
                 } else {
                     this.commonErrorElement.style.display = 'block';
                     return;

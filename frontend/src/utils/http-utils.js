@@ -26,7 +26,8 @@ export class HttpUtils {
                     return await response.json();
                 }
             }
-            return await response.json();
+            // return await response.json();
+            return response;
         }
         return await response.json();
     }

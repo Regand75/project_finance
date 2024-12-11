@@ -5,6 +5,7 @@ import {OperationsList} from "./components/operations/operations-list.js";
 import {AuthUtils} from "./utils/auth-utils.js";
 import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
+import {IncomeCreating} from "./components/incomes/incoome-creating.js";
 
 export class Router {
     constructor() {
@@ -133,11 +134,11 @@ export class Router {
             },
             {
                 route: '#/incomes/creating',
-                title: 'Создание доходов',
+                title: 'Создание дохода',
                 template: 'src/templates/pages/incomes/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Incomes();
+                    new IncomeCreating();
                 },
                 styles: [
                     'layout.css',
