@@ -1,7 +1,12 @@
 import {AuthUtils} from "./auth-utils.js";
+import config from "../../config/config.js";
 
 export class HttpUtils {
     static async request(url, method = 'GET', body = null, retries = 1) {
+        const result = {
+            error: false,
+            response: null,
+        };
         const params = {
             method: method,
             headers: {
@@ -16,19 +21,30 @@ export class HttpUtils {
         if (body) {
             params.body = JSON.stringify(body);
         }
-        const response = await fetch(url, params);
+        let response = null;
+        try {
+            response = await fetch(url, params);
+            result.response = await response.json();
+        } catch (e) {
+            result.error = true;
+            return result;
+        }
+
         if (response.status < 200 || response.status >= 300) {
+            result.error = true;
             if (response.status === 401 && retries > 0) {
-                const result = await AuthUtils.processUnauthorizedResponse();
-                if (result) {
-                    return await this.request(url, method, body, retries - 1);
+                if (!token) {
+                    result.redirect = '#/login';
                 } else {
-                    return await response.json();
+                    const updateTokenResult = await AuthUtils.processUnauthorizedResponse();
+                    if (updateTokenResult) {
+                        return await this.request(url, method, body, retries - 1);
+                    } else {
+                        result.redirect = '#/login';
+                    }
                 }
             }
-            // return await response.json();
-            return response;
         }
-        return await response.json();
+        return result;
     }
 }

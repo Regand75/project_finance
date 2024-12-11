@@ -18,12 +18,10 @@ export class IncomeCreating {
 
     async creatingCategory() {
         try {
-            const result = await OperationsService.creatingCategory('income', {
+            const result = await OperationsService.createCategory('/income', {
                 title: this.titleNewCategoryInput.value,
             });
             if (result) {
-                console.log(result);
-                console.log(result.status);
                 location.href = '#/operations/creating';
             }
 

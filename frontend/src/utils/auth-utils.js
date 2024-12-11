@@ -36,7 +36,6 @@ export class AuthUtils {
                 location.href = '#/login';
             }
         }
-
         return result;
     }
 

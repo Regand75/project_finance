@@ -27,7 +27,7 @@ export class OperationsList {
             const operationsResult = await OperationsService.getOperations(`?period=${period}`);
             this.showRecords(operationsResult);
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     }
 

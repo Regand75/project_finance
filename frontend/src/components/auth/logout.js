@@ -1,6 +1,5 @@
-import {HttpUtils} from "../../utils/http-utils.js";
-import config from "../../../config/config.js";
 import {AuthUtils} from "../../utils/auth-utils.js";
+import {AuthService} from "../../services/auth-service.js";
 
 export class Logout {
     constructor() {
@@ -13,10 +12,9 @@ export class Logout {
     async logout() {
         const refreshToken = localStorage.getItem(AuthUtils.refreshTokenKey);
         if (refreshToken) {
-            const result = await HttpUtils.request(config.host + '/logout', 'POST', {
+            await AuthService.logOut({
                 refreshToken: refreshToken,
             });
-            console.log(result);
             AuthUtils.removeToken();
             AuthUtils.removeUserInfo();
             window.location.href = '#/login';
