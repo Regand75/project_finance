@@ -13,9 +13,12 @@ export class OperationsService {
 
     static async createCategory(partPath, data) {
         const result = await HttpUtils.request(config.host + '/categories' + partPath, 'POST', data);
-        console.log(result);
         if (result.redirect || result.error || !result.response) {
-            return alert('Возникла ошибка при создании категории. Обратитесь в поддержку');
+            if (result.status !== 400) {
+                return alert('Возникла ошибка при создании категории. Обратитесь в поддержку');
+            } else {
+                return alert('Такая запись уже существует');
+            }
         }
         return result.response;
     }

@@ -32,6 +32,7 @@ export class HttpUtils {
 
         if (response.status < 200 || response.status >= 300) {
             result.error = true;
+            result.status = response.status;
             if (response.status === 401 && retries > 0) {
                 if (!token) {
                     result.redirect = '#/login';

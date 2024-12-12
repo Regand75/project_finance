@@ -5,7 +5,8 @@ import {OperationsList} from "./components/operations/operations-list.js";
 import {AuthUtils} from "./utils/auth-utils.js";
 import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
-import {IncomeCreating} from "./components/incomes/incoome-creating.js";
+import {CategoryCreating} from "./components/categories/category-creating.js";
+import {OperationCreating} from "./components/operations/operation-creating.js";
 
 export class Router {
     constructor() {
@@ -96,7 +97,7 @@ export class Router {
                 template: 'src/templates/pages/operations/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-
+                    new OperationCreating();
                 },
                 styles: [
                     'layout.css',
@@ -138,7 +139,7 @@ export class Router {
                 template: 'src/templates/pages/incomes/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomeCreating();
+                    new CategoryCreating();
                 },
                 styles: [
                     'layout.css',
@@ -180,7 +181,7 @@ export class Router {
                 template: 'src/templates/pages/expenses/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Expenses();
+                    new CategoryCreating();
                 },
                 styles: [
                     'layout.css',

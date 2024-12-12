@@ -24,12 +24,12 @@
                     <option value="accounts">Счета</option>
                     <option value="spert">Спорт</option>
                 </select>
-                <input class="form-control input-custom text-dark" type="text" placeholder="Сумма в $..." required>
-                <input class="form-control input-custom text-dark" type="text" placeholder="Дата..." required>
-                <input class="form-control input-custom text-dark" type="text" placeholder="Комментарий...">
+                <input class="form-control input-custom text-dark" type="text" id="amountInput" placeholder="Сумма в $..." required>
+                <input class="form-control input-custom text-dark" type="text" id="dateInput" placeholder="Дата..." required>
+                <input class="form-control input-custom text-dark" type="text" id="commentInput" placeholder="Комментарий...">
                 <div class="creating-income-active d-flex">
-                    <a href="#" class="btn btn-success btn-custom">Создать</a>
-                    <a href="#/operations" class="btn btn-danger btn-custom" type="button">Отмена</a>
+                    <button class="btn btn-success btn-custom" type="button" id="operation-creating">Создать</button>
+                    <button class="btn btn-danger btn-custom" type="button" id="button-back">Отмена</button>
                 </div>
             </div>
         </div>
