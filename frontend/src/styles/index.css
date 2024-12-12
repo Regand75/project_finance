@@ -102,4 +102,12 @@
     color: #052C65;
 }
 
+.container .input-group {
+    width: 397px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
 

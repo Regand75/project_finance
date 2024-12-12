@@ -1,5 +1,6 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {UrlUtils as urlUtils} from "../../utils/url-utils.js";
+import {AuthUtils} from "../../utils/auth-utils.js";
 
 export class CategoryCreating {
     constructor() {
@@ -11,7 +12,6 @@ export class CategoryCreating {
         this.titleNewCategoryInput.addEventListener('input', this.activeButton.bind(this));
         this.creatingCategoryElement.addEventListener('click', this.creatingCategory.bind(this));
         this.category = urlUtils.getUrlHashPart();
-        console.log(this.category);
     }
 
     activeButton() {
@@ -35,10 +35,7 @@ export class CategoryCreating {
                 title: this.titleNewCategoryInput.value,
             });
             if (result) {
-                sessionStorage.setItem('categoryData', JSON.stringify({
-                    id: result.id,
-                    title: result.title,
-                }));
+                AuthUtils.setCategoryData(result.id, result.title, this.category);
                 location.href = '#/operations/creating';
             }
 

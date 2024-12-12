@@ -22,4 +22,16 @@ export class OperationsService {
         }
         return result.response;
     }
+
+    static async saveOperation(data) {
+        const result = await HttpUtils.request(config.host + '/operations', 'POST', data);
+        if (result.redirect || result.error || !result.response) {
+            if (result.status !== 400) {
+                return alert('Возникла ошибка при создании категории. Обратитесь в поддержку');
+            } else {
+                return alert('Такая запись уже существует');
+            }
+        }
+        return result.response;
+    }
 }

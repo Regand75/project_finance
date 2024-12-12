@@ -24,11 +24,25 @@
                     <option value="accounts">Счета</option>
                     <option value="spert">Спорт</option>
                 </select>
-                <input class="form-control input-custom text-dark" type="text" id="amountInput" placeholder="Сумма в $..." required>
-                <input class="form-control input-custom text-dark" type="text" id="dateInput" placeholder="Дата..." required>
-                <input class="form-control input-custom text-dark" type="text" id="commentInput" placeholder="Комментарий...">
-                <div class="creating-income-active d-flex">
-                    <button class="btn btn-success btn-custom" type="button" id="operation-creating">Создать</button>
+                <div class="input-group has-validation">
+                    <input class="form-control input-custom text-dark mb-0" type="text" id="amount"
+                           placeholder="Сумма в $..." required>
+                    <div class="invalid-feedback">
+                        Введите числовое значение
+                    </div>
+                </div>
+                <div class="input-group has-validation">
+                    <input class="form-control input-custom text-dark mb-0" type="text" id="date" placeholder="Дата..."
+                           required>
+                    <div class="invalid-feedback">
+                        Введите дату в формате дд.мм.гггг
+                    </div>
+                </div>
+                <input class="form-control input-custom text-dark" type="text" id="comment"
+                       placeholder="Комментарий...">
+                <div class="creating-income-active d-flex mt-3">
+                    <button class="btn btn-success btn-custom" type="button" id="operation-creating" disabled>Создать
+                    </button>
                     <button class="btn btn-danger btn-custom" type="button" id="button-back">Отмена</button>
                 </div>
             </div>
