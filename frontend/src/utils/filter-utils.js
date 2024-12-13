@@ -67,7 +67,13 @@ export class FilterUtils {
                                 const operationsResult = await OperationsService.getOperations(
                                     `?period=${period}&dateFrom=${convertedFrom}&dateTo=${convertedTo}`
                                 );
-                                showRecords(operationsResult); // Обновляем записи
+                                if (operationsResult) {
+                                    showRecords(operationsResult); // Обновляем записи
+                                } else if (operationsResult.error) {
+                                    console.log(operationsResult.error);
+                                    location.href = '#/';
+                                }
+
                             } catch (error) {
                                 console.log(error);
                             }
@@ -84,7 +90,12 @@ export class FilterUtils {
                         const operationsResult = await OperationsService.getOperations(
                             `?period=${period}&dateFrom=${convertedFromValue}&dateTo=${convertedToValue}`
                         );
-                        showRecords(operationsResult); // Обновляем записи
+                        if (operationsResult) {
+                            showRecords(operationsResult); // Обновляем записи
+                        } else if (operationsResult.error) {
+                            console.log(operationsResult.error);
+                            location.href = '#/';
+                        }
                     } catch (error) {
                         console.log(error);
                     }
@@ -92,7 +103,12 @@ export class FilterUtils {
             } else {
                 try {
                     const operationsResult = await OperationsService.getOperations(`?period=${period}`);
-                    showRecords(operationsResult);
+                    if (operationsResult) {
+                        showRecords(operationsResult); // Обновляем записи
+                    } else if (operationsResult.error) {
+                        console.log(operationsResult.error);
+                        location.href = '#/';
+                    }
                 } catch (error) {
                     console.log(error);
                 }

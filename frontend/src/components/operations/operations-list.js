@@ -25,7 +25,13 @@ export class OperationsList {
     async getOperations(period) {
         try {
             const operationsResult = await OperationsService.getOperations(`?period=${period}`);
-            this.showRecords(operationsResult);
+            if (operationsResult && operationsResult.length > 0) {
+                this.showRecords(operationsResult);
+            } else if (operationsResult.error) {
+                console.log(operationsResult.error);
+                location.href = '#/';
+            }
+
         } catch (error) {
             console.log(error);
         }

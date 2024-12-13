@@ -31,12 +31,15 @@ export class CategoryCreating {
             partUrl = '/expense';
         }
         try {
-            const result = await OperationsService.createCategory(partUrl, {
+            const operationsResult = await OperationsService.createCategory(partUrl, {
                 title: this.titleNewCategoryInput.value,
             });
-            if (result) {
-                AuthUtils.setCategoryData(result.id, result.title, this.category);
+            if (operationsResult) {
+                AuthUtils.setCategoryData(operationsResult.id, operationsResult.title, this.category);
                 location.href = '#/operations/creating';
+            } else if (operationsResult.error) {
+                console.log(operationsResult.error);
+                location.href = '#/';
             }
 
         } catch (error) {

@@ -16,7 +16,7 @@ export class OperationsService {
         if (result.redirect || result.error || !result.response) {
             if (result.status !== 400) {
                 return alert('Возникла ошибка при создании категории. Обратитесь в поддержку');
-            } else {
+            } else if (result.status === 400) {
                 return alert('Такая запись уже существует');
             }
         }
@@ -25,10 +25,11 @@ export class OperationsService {
 
     static async saveOperation(data) {
         const result = await HttpUtils.request(config.host + '/operations', 'POST', data);
+        console.log('saveOperation', result);
         if (result.redirect || result.error || !result.response) {
             if (result.status !== 400) {
                 return alert('Возникла ошибка при создании категории. Обратитесь в поддержку');
-            } else {
+            } else if (result.status !== 400) {
                 return alert('Такая запись уже существует');
             }
         }

@@ -7,6 +7,7 @@ export class OperationCreating {
         this.categoryData = AuthUtils.getCategoryData();
         this.operationCreatingButton = document.getElementById('operation-creating');
         this.operationCreatingButton.addEventListener('click', this.saveOperation.bind(this));
+
         document.getElementById('button-back').addEventListener('click', () => {
             window.history.back();
         });
@@ -26,6 +27,12 @@ export class OperationCreating {
                 id: 'date',
                 element: null,
                 regex: /^([0-2]\d|3[01])\.(0\d|1[0-2])\.(\d{4})$/,
+                valid: false,
+            },
+            {
+                name: 'comment',
+                id: 'comment',
+                element: null,
                 valid: false,
             },
         ];
@@ -75,7 +82,7 @@ export class OperationCreating {
                     category_id: this.categoryData.id,
                 });
                 if (operationResult) {
-                    console.log("Operation saved");
+                    location.href = `#/${this.categoryData.category}`;
                 }
             } catch (error) {
                 console.log(error);
