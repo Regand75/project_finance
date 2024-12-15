@@ -4,7 +4,6 @@ export class AuthUtils {
     static accessTokenKey = 'accessToken';
     static refreshTokenKey = 'refreshToken';
     static userInfoKey = 'userInfo';
-    static categoryData = 'categoryData';
 
     static async processUnauthorizedResponse() {
         let result = false;
@@ -61,18 +60,5 @@ export class AuthUtils {
 
     static removeUserInfo() {
         localStorage.removeItem(this.userInfoKey);
-    }
-
-    static setCategoryData(id, title, category) {
-        sessionStorage.setItem(this.categoryData, JSON.stringify({
-            id: id,
-            title: title,
-            category: category,
-        }));
-    }
-
-    static getCategoryData() {
-        const categoryData = sessionStorage.getItem(this.categoryData);
-        return categoryData ? JSON.parse(categoryData) : null;
     }
 }

@@ -1,11 +1,10 @@
 import {ModalManager} from "../modal.js";
-import {CommonUtils} from "../../utils/common-utils.js";
+import {OperationsService} from "../../services/operations-service.js";
 
 export class Incomes {
     constructor() {
         this.buttonNoDeleteElement = document.getElementById("no-delete");
         this.buttonDeleteIncomeElements = document.querySelectorAll('.income-delete');
-        this.buttonSaveIncomeElement = document.getElementById('income-save');
 
         if (this.buttonDeleteIncomeElements) {
             this.buttonDeleteIncomeElements.forEach(button => {
@@ -16,9 +15,24 @@ export class Incomes {
         if (this.buttonNoDeleteElement) {
             this.buttonNoDeleteElement.addEventListener('click', ModalManager.hideModal);
         }
+       this.getIncomes('income').then();
+    }
 
-        if (this.buttonSaveIncomeElement) {
-            this.buttonSaveIncomeElement.addEventListener('click', CommonUtils.saveOperation);
+    async getIncomes(params) {
+        try {
+            const incomesResult = await OperationsService.getCategories(`/${params}`);
+            if (incomesResult && incomesResult.length > 0) {
+                this.showIncomes(incomesResult);
+            } else if (incomesResult.error) {
+                console.log(incomesResult.error);
+                location.href = '#/operations';
+            }
+        } catch (error) {
+            console.log(error);
         }
+    }
+
+    showIncomes(incomes) {
+        console.log(incomes);
     }
 }

@@ -5,7 +5,6 @@ export class Expenses {
     constructor() {
         this.buttonNoDeleteElement = document.getElementById("no-delete");
         this.buttonDeleteExpenseElements = document.querySelectorAll('.expense-delete');
-        this.buttonSaveExpenseElement = document.getElementById('expense-save');
 
         if (this.buttonDeleteExpenseElements) {
             this.buttonDeleteExpenseElements.forEach(button => {
@@ -15,10 +14,6 @@ export class Expenses {
 
         if (this.buttonNoDeleteElement) {
             this.buttonNoDeleteElement.addEventListener('click', ModalManager.hideModal);
-        }
-
-        if (this.buttonSaveExpenseElement) {
-            this.buttonSaveExpenseElement.addEventListener('click', CommonUtils.saveOperation);
         }
     }
 

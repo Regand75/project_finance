@@ -97,7 +97,7 @@ export class Router {
                 template: 'src/templates/pages/operations/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new OperationCreating();
+                    new OperationCreating(this.parseHash.bind(this));
                 },
                 styles: [
                     'layout.css',
@@ -134,7 +134,7 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes/creating',
+                route: '#/income/creating',
                 title: 'Создание дохода',
                 template: 'src/templates/pages/incomes/creating.html',
                 useLayout: 'src/templates/layout.html',
@@ -176,7 +176,7 @@ export class Router {
                 ],
             },
             {
-                route: '#/expenses/creating',
+                route: '#/expense/creating',
                 title: 'Создание расходов',
                 template: 'src/templates/pages/expenses/creating.html',
                 useLayout: 'src/templates/layout.html',
@@ -197,9 +197,22 @@ export class Router {
         window.addEventListener('popstate', this.activateRoute.bind(this));
     }
 
+    parseHash() {
+        const hash = window.location.hash; // Получаем hash из адресной строки
+        const [routeWithHash, queryString] = hash.split('?'); // Разделяем на маршрут и параметры
+
+        const params = queryString ? Object.fromEntries(new URLSearchParams(queryString).entries()) : null; // Если параметры есть, создаем объект URLSearchParams
+
+        return {
+            routeWithHash, // Маршрут с символом #
+            params         // Объект URLSearchParams для извлечения параметров
+        };
+    }
+
     async activateRoute() {
+        const { routeWithHash } = this.parseHash(); // Получаем текущий маршрут
         const previousRoute = this.currentRoute; // Сохраняем предыдущий маршрут
-        this.currentRoute = window.location.hash; // Обновляем текущий маршрут
+        this.currentRoute = routeWithHash; // Обновляем текущий маршрут
         // Находим объект маршрута для предыдущего
         const previousRouteObject = this.routes.find(route => route.route === previousRoute);
         if (previousRouteObject.styles && previousRouteObject.styles.length > 0) {
@@ -213,7 +226,9 @@ export class Router {
         }
 
         const newRoute = this.routes.find(item => {
-            return item.route === window.location.hash;
+            const {routeWithHash} = this.parseHash(); //получаем маршрут без параметров
+            // return item.route === window.location.hash;
+            return item.route === routeWithHash;
         });
 
         if (newRoute) {

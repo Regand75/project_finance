@@ -1,6 +1,6 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {UrlUtils as urlUtils} from "../../utils/url-utils.js";
-import {AuthUtils} from "../../utils/auth-utils.js";
+import {CommonUtils} from "../../utils/common-utils.js";
 
 export class CategoryCreating {
     constructor() {
@@ -23,23 +23,22 @@ export class CategoryCreating {
     };
 
     async creatingCategory() {
-
         let partUrl = ''
-        if (this.category === 'incomes') {
+        if (this.category === 'income') {
             partUrl = '/income';
-        } else if (this.category === 'expenses') {
+        } else if (this.category === 'expense') {
             partUrl = '/expense';
         }
+
         try {
             const operationsResult = await OperationsService.createCategory(partUrl, {
                 title: this.titleNewCategoryInput.value,
             });
             if (operationsResult) {
-                AuthUtils.setCategoryData(operationsResult.id, operationsResult.title, this.category);
-                location.href = '#/operations/creating';
+                location.href = `#/operations/creating?category=${this.category}&id=${operationsResult.id}`;
             } else if (operationsResult.error) {
                 console.log(operationsResult.error);
-                location.href = '#/';
+                location.href = '#/operations';
             }
 
         } catch (error) {
