@@ -1,7 +1,9 @@
 export class ModalManager {
 
-    static showModal() {
-        document.getElementById("modal-overlay").classList.add("active");
+    static showModal(id, category) {
+        const modalOverlay = document.getElementById("modal-overlay");
+        modalOverlay.dataset.params = JSON.stringify({id: id, category: category}); // сохраняем id и название категории
+        modalOverlay.classList.add("active");
         document.body.style.overflow = 'hidden';
     }
 

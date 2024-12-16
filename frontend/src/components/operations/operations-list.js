@@ -31,7 +31,6 @@ export class OperationsList {
                 console.log(operationsResult.error);
                 location.href = '#/';
             }
-
         } catch (error) {
             console.log(error);
         }

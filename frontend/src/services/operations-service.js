@@ -19,6 +19,14 @@ export class OperationsService {
         return result.response;
     }
 
+    static async getCategory(params = '') {
+        const result = await HttpUtils.request(config.host + '/categories' + params);
+        if (result.redirect || result.error || !result.response) {
+            return alert('Возникла ошибка при запросе операции. Обратитесь в поддержку');
+        }
+        return result.response;
+    }
+
     static async createCategory(partPath, data) {
         const result = await HttpUtils.request(config.host + '/categories' + partPath, 'POST', data);
         if (result.redirect || result.error || !result.response) {
@@ -45,6 +53,14 @@ export class OperationsService {
 
     static async deleteCategory(params = '') {
         const result = await HttpUtils.request(config.host + '/categories' + params, 'DELETE');
+        if (result.redirect || result.error || !result.response) {
+            return alert('Возникла ошибка при удалении операции. Обратитесь в поддержку');
+        }
+        return result.response;
+    }
+
+    static async deleteOperation(params = '') {
+        const result = await HttpUtils.request(config.host + '/operations' + params, 'DELETE');
         if (result.redirect || result.error || !result.response) {
             return alert('Возникла ошибка при удалении операции. Обратитесь в поддержку');
         }
