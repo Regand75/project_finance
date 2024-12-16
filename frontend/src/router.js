@@ -7,6 +7,7 @@ import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
 import {CategoryCreating} from "./components/categories/category-creating.js";
 import {OperationCreating} from "./components/operations/operation-creating.js";
+import {CategoryEdit} from "./components/categories/category-edit.js";
 
 export class Router {
     constructor() {
@@ -125,7 +126,7 @@ export class Router {
                 template: 'src/templates/pages/incomes/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Incomes();
+                    new CategoryEdit();
                 },
                 styles: [
                     'layout.css',
@@ -167,7 +168,7 @@ export class Router {
                 template: 'src/templates/pages/expenses/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Expenses();
+                    new CategoryEdit();
                 },
                 styles: [
                     'layout.css',
