@@ -39,6 +39,14 @@ export class OperationsService {
         return result.response;
     }
 
+    static async updateCategory(partPath, data) {
+        const result = await HttpUtils.request(config.host + '/categories' + partPath, 'PUT', data);
+        if (result.redirect || result.error || !result.response) {
+            return alert('Возникла ошибка при обновлении категории. Обратитесь в поддержку');
+        }
+        return result.response;
+    }
+
     static async createOperation(data) {
         const result = await HttpUtils.request(config.host + '/operations', 'POST', data);
         if (result.redirect || result.error || !result.response) {

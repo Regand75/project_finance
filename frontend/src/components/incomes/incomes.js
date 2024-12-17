@@ -38,18 +38,23 @@ export class Incomes {
         try {
             const operationsResult = await OperationsService.getOperations(`?period=all`); // получаем все операции для последующего удаления совпадающих с удаляемой категорией
             if (operationsResult && operationsResult.length > 0) {
-                const operationsToDeleteResult = operationsResult.find(item => item.category === this.params.category); // находим все операции совпадающие с удаляемой категорией
+                const operationsToDeleteResult = operationsResult.filter(item => item.category === this.params.category); // находим все записи, связанные с удаляемой категорией
                 if (operationsToDeleteResult) {
                     const deleteCategoryResult = await OperationsService.deleteCategory(`/income/${this.params.id}`); // удаляем категорию
                     if (deleteCategoryResult) {
-                        const deleteOperationResult = await OperationsService.deleteOperation(`/${operationsToDeleteResult.id}`); // удаляем операции
-                        if (deleteOperationResult) {
-                            location.href = '#/incomes';
-                            console.log('DELETE CATEGORY', deleteOperationResult);
-                        } else if (deleteOperationResult.error) {
-                            console.log(deleteOperationResult.error);
-                            location.href = '#/operations';
+                        for (const item of operationsToDeleteResult) {
+                            try {
+                                const deleteOperationResult = await OperationsService.deleteOperation(`/${item.id}`); // удаляем записи, связанные с удаленной категорией
+                                if (deleteOperationResult) {
+                                    this.flagDelete = true;
+                                }
+                            } catch (error) {
+                                console.log(error);
+                            }
                         }
+                        ModalManager.hideModal();
+                        location.href = '#/incomes';
+                        console.log('DELETE CATEGORY');
                     } else if (deleteCategoryResult.error) {
                         console.log(deleteCategoryResult.error);
                         location.href = '#/operations';
@@ -75,7 +80,7 @@ export class Incomes {
         });
     }
 
-    createIncomeBlock(id, title, editHref = '#/incomes/edit') {
+    createIncomeBlock(id, title, editHref = '#/income/edit') {
         // Создаем основной контейнер
         const block = document.createElement('div');
         block.className = 'income-block border bg-border-custom rounded';

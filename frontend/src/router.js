@@ -121,12 +121,12 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes/edit',
+                route: '#/income/edit',
                 title: 'Редактирование доходов',
                 template: 'src/templates/pages/incomes/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new CategoryEdit();
+                    new CategoryEdit(this.parseHash.bind(this));
                 },
                 styles: [
                     'layout.css',
@@ -163,12 +163,12 @@ export class Router {
                 ],
             },
             {
-                route: '#/expenses/edit',
+                route: '#/expense/edit',
                 title: 'Редактирование расходов',
                 template: 'src/templates/pages/expenses/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new CategoryEdit();
+                    new CategoryEdit(this.parseHash.bind(this));
                 },
                 styles: [
                     'layout.css',

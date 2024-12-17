@@ -3,8 +3,7 @@ import {CommonUtils} from "../../utils/common-utils.js";
 
 export class OperationCreating {
     constructor(parseHash) {
-        this.parseHash = parseHash;
-        const {routeWithHash, params} = parseHash();
+        const { params } = parseHash();
         this.params = params;
         this.typeElement = document.getElementById('typeSelect');
         this.categoryElement = document.getElementById('categorySelect');
