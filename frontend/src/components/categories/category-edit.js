@@ -8,6 +8,10 @@ export class CategoryEdit {
         this.category = urlUtils.getUrlHashPart();
         this.categoryInput = document.getElementById("category-input");
         this.categorySaveElement = document.getElementById('category-save');
+
+        this.categorySaveElement.addEventListener('click', this.saveCategory.bind(this));
+
+        this.categoryInput.addEventListener('input', this.activeButton.bind(this));
         document.getElementById('button-back').addEventListener('click', () => {
             window.history.back();
         });
@@ -15,16 +19,11 @@ export class CategoryEdit {
         this.outputCategory().then();
     }
 
-    /* 1. Если input пустой, кнопка сохранить не активна, использовать onchage
-    *  2. При нажатии на кнопку сохранить, делается запрос на backend для сохранения и переводится на
-    * страницу '#/operations/edit' (посмотреть видео, как сделать, что если не были внесены изменения,
-    * просто перевести на следующую страницу
-    * */
-
     async outputCategory() {
         try {
             const categoryResult = await OperationsService.getCategory(`/${this.category}/${this.params.id}`);
             if (categoryResult) {
+                this.categoryOriginalData = categoryResult.title;
                 this.categoryInput.value = categoryResult.title;
             } else if (categoryResult.error) {
                 console.log(categoryResult.error);
@@ -32,6 +31,34 @@ export class CategoryEdit {
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    activeButton() {
+        if (this.categoryInput.value !== '') {
+            this.categorySaveElement.removeAttribute('disabled');
+        } else {
+            this.categorySaveElement.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    async saveCategory() {
+        if (this.categoryInput.value !== this.categoryOriginalData) {
+            try {
+                const updateCategoryResult = await OperationsService.updateCategory(`/${this.category}/${this.params.id}`, {
+                    title: this.categoryInput.value,
+                });
+                if (updateCategoryResult) {
+                    location.href = `#/operations/edit?category=${this.category}&id=${updateCategoryResult.id}`;
+                } else if (updateCategoryResult.error) {
+                    console.log(updateCategoryResult.error);
+                    location.href = '#/operations';
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            location.href = location.href = `#/operations/edit?category=${this.category}&id=${this.params.id}`;
         }
     }
 }

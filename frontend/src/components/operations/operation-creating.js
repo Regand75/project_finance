@@ -11,7 +11,7 @@ export class OperationCreating {
         this.operationCreatingButton.addEventListener('click', this.saveOperation.bind(this));
 
         document.getElementById('button-back').addEventListener('click', () => {
-            this.deleteCategory(this.params).then();
+            // this.deleteCategory(this.params).then();
             window.history.back();
         });
 
@@ -79,19 +79,19 @@ export class OperationCreating {
         }
     }
 
-    async deleteCategory(params) {
-        try {
-            const deleteResult = await OperationsService.deleteCategory(`/${this.params.category}/${params.id}`);
-            if (deleteResult) {
-                location.href = `#/${this.params.category}/creating`;
-            } else if (deleteResult.error) {
-                console.log(deleteResult.error);
-                location.href = '#/operations';
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // async deleteCategory(params) {
+    //     try {
+    //         const deleteResult = await OperationsService.deleteCategory(`/${this.params.category}/${params.id}`);
+    //         if (deleteResult) {
+    //             location.href = `#/${this.params.category}/creating`;
+    //         } else if (deleteResult.error) {
+    //             console.log(deleteResult.error);
+    //             location.href = '#/operations';
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     showTypeSelects() {
         for (let i = 0; i < this.typeElement.options.length; i++) {

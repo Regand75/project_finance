@@ -1,6 +1,5 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {UrlUtils as urlUtils} from "../../utils/url-utils.js";
-import {CommonUtils} from "../../utils/common-utils.js";
 
 export class CategoryCreating {
     constructor() {
