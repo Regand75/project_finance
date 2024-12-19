@@ -1,12 +1,11 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {UrlUtils as urlUtils} from "../../utils/url-utils.js";
+import {CommonUtils} from "../../utils/common-utils.js";
 
 export class CategoryCreating {
     constructor() {
         this.titleNewCategoryInput = document.getElementById('title-new-category');
-        document.getElementById('button-back').addEventListener('click', () => {
-            window.history.back();
-        });
+        CommonUtils.initBackButton();
         this.creatingCategoryElement = document.getElementById('creating-category');
         this.titleNewCategoryInput.addEventListener('input', this.activeButton.bind(this));
         this.creatingCategoryElement.addEventListener('click', this.creatingCategory.bind(this));
@@ -34,7 +33,7 @@ export class CategoryCreating {
                 title: this.titleNewCategoryInput.value,
             });
             if (operationsResult) {
-                location.href = `#/operations/creating?category=${this.category}&id=${operationsResult.id}`;
+                location.href = `#/${this.category}s`;
             } else if (operationsResult.error) {
                 console.log(operationsResult.error);
                 location.href = '#/operations';

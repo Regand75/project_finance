@@ -8,6 +8,7 @@ import {Form} from "./components/auth/form.js";
 import {CategoryCreating} from "./components/categories/category-creating.js";
 import {OperationCreating} from "./components/operations/operation-creating.js";
 import {CategoryEdit} from "./components/categories/category-edit.js";
+import {OperationEdit} from "./components/operations/operation-edit.js";
 
 export class Router {
     constructor() {
@@ -84,7 +85,7 @@ export class Router {
                 template: 'src/templates/pages/operations/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-
+                    new OperationEdit(this.parseHash.bind(this));
                 },
                 styles: [
                     'layout.css',

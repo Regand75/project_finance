@@ -74,7 +74,9 @@
 .edit-income-active,
 .creating-expense-active,
 .edit-expense-active,
-.operations-active {
+.operations-active,
+.operation-creating-active,
+.operation-edit-active {
     gap: 10px;
 }
 

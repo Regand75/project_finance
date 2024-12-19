@@ -1,5 +1,6 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {UrlUtils as urlUtils} from "../../utils/url-utils.js";
+import {CommonUtils} from "../../utils/common-utils.js";
 
 export class CategoryEdit {
     constructor(parseHash) {
@@ -12,9 +13,8 @@ export class CategoryEdit {
         this.categorySaveElement.addEventListener('click', this.saveCategory.bind(this));
 
         this.categoryInput.addEventListener('input', this.activeButton.bind(this));
-        document.getElementById('button-back').addEventListener('click', () => {
-            window.history.back();
-        });
+
+        CommonUtils.initBackButton();
 
         this.outputCategory().then();
     }
@@ -49,7 +49,7 @@ export class CategoryEdit {
                     title: this.categoryInput.value,
                 });
                 if (updateCategoryResult) {
-                    location.href = `#/operations/edit?category=${this.category}&id=${updateCategoryResult.id}`;
+                    location.href = `#/${this.category}s`;
                 } else if (updateCategoryResult.error) {
                     console.log(updateCategoryResult.error);
                     location.href = '#/operations';
@@ -58,7 +58,7 @@ export class CategoryEdit {
                 console.log(error);
             }
         } else {
-            location.href = location.href = `#/operations/edit?category=${this.category}&id=${this.params.id}`;
+            location.href = `#/${this.category}s`;
         }
     }
 }

@@ -19,6 +19,14 @@ export class OperationsService {
         return result.response;
     }
 
+    static async getOperation(params = '') {
+        const result = await HttpUtils.request(config.host + '/operations' + params);
+        if (result.redirect || result.error || !result.response) {
+            return alert('Возникла ошибка при запросе операции. Обратитесь в поддержку');
+        }
+        return result.response;
+    }
+
     static async getCategory(params = '') {
         const result = await HttpUtils.request(config.host + '/categories' + params);
         if (result.redirect || result.error || !result.response) {

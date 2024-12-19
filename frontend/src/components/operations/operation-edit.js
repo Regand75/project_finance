@@ -1,14 +1,14 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {CommonUtils} from "../../utils/common-utils.js";
 
-export class OperationCreating {
+export class OperationEdit {
     constructor(parseHash) {
         const { params } = parseHash();
         this.params = params;
         this.typeElement = document.getElementById('typeSelect');
         this.categoryElement = document.getElementById('categorySelect');
-        this.operationCreatingButton = document.getElementById('operation-creating');
-        this.operationCreatingButton.addEventListener('click', this.saveOperation.bind(this));
+        this.operationEditButton = document.getElementById('operation-edit');
+        this.operationEditButton.addEventListener('click', this.saveOperation.bind(this));
 
         CommonUtils.initBackButton();
 
@@ -44,17 +44,24 @@ export class OperationCreating {
             }
         })
 
-        this.getCategories(this.params.category).then();
+        this.getOperation(this.params.id).then();
     }
 
-    async getCategories(categoryType) {
+    async getOperation(id) {
+        let amount = this.fields.find(item => item.name === 'amount').element.value;
+        let date = this.fields.find(item => item.name === 'date').element.value;
+        let comment = document.getElementById('comment').value;
         try {
-            const categoriesResult = await OperationsService.getCategories(`/${categoryType}`);
-            if (categoriesResult && categoriesResult.length > 0) {
+            const operationResult = await OperationsService.getOperation(`/${id}`);
+            console.log(operationResult);
+            if (operationResult && operationResult.length > 0) {
                 this.showTypeSelects();
-                this.showCategorySelects(categoriesResult);
-            } else if (categoriesResult.error) {
-                console.log(categoriesResult.error);
+                this.showCategorySelects(operationResult);
+                amount = operationResult.amount;
+                date = operationResult.date;
+                comment = operationResult.comment;
+            } else if (operationResult.error) {
+                console.log(operationResult.error);
                 location.href = '#/operations';
             }
         } catch (error) {
@@ -111,9 +118,9 @@ export class OperationCreating {
     validateForm() {
         const validForm = this.fields.every(item => item.valid);
         if (validForm) {
-            this.operationCreatingButton.removeAttribute('disabled');
+            this.operationEditButton.removeAttribute('disabled');
         } else {
-            this.operationCreatingButton.setAttribute('disabled', 'disabled');
+            this.operationEditButton.setAttribute('disabled', 'disabled');
         }
         return validForm;
     };
@@ -122,9 +129,9 @@ export class OperationCreating {
         e.preventDefault();
 
         if (this.validateForm()) {
-            const amount = this.fields.find(item => item.name === 'amount').element.value;
-            const date = CommonUtils.convertDate(this.fields.find(item => item.name === 'date').element.value);
-            const comment = document.getElementById('comment').value;
+            // const amount = this.fields.find(item => item.name === 'amount').element.value;
+            // const date = CommonUtils.convertDate(this.fields.find(item => item.name === 'date').element.value);
+            // const comment = document.getElementById('comment').value;
             try {
                 const operationResult = await OperationsService.createOperation({
                     type: this.typeElement.value,

@@ -13,6 +13,14 @@ export class OperationsList {
             FilterUtils.handleFilterClick(event, this.showRecords.bind(this))
         );
 
+        document.getElementById('creating-income').addEventListener('click', () => {
+            location.href = '#/operations/creating?category=income';
+        });
+
+        document.getElementById('creating-expense').addEventListener('click', () => {
+            location.href = '#/operations/creating?category=expense';
+        });
+
         if (this.buttonNoDeleteElement) {
             this.buttonNoDeleteElement.addEventListener('click', ModalManager.hideModal);
         }
@@ -71,7 +79,7 @@ export class OperationsList {
         <td>${formattedDate}</td>
         <td>${operation.comment}</td>
         <td class="text-nowrap">
-            ${CommonUtils.generateGridToolsColumn('operations', operation.id)}
+            ${CommonUtils.generateGridToolsColumn('operations', operation.id, operation.type)}
         </td>
     `;
         return tr;
