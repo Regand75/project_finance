@@ -52,7 +52,7 @@ export class OperationCreating {
             const categoriesResult = await OperationsService.getCategories(`/${categoryType}`);
             if (categoriesResult && categoriesResult.length > 0) {
                 this.showTypeSelects();
-                this.showCategorySelects(categoriesResult);
+                this.showCategorySelect(categoriesResult);
             } else if (categoriesResult.error) {
                 console.log(categoriesResult.error);
                 location.href = '#/operations';
@@ -66,7 +66,7 @@ export class OperationCreating {
         try {
             const categoriesResult = await OperationsService.getCategories(`/${this.typeElement.value}`);
             if (categoriesResult && categoriesResult.length > 0) {
-                this.showCategorySelects(categoriesResult);
+                this.showCategorySelect(categoriesResult);
             } else if (categoriesResult.error) {
                 console.log(categoriesResult.error);
                 location.href = '#/operations';
@@ -84,15 +84,12 @@ export class OperationCreating {
         }
     }
 
-    showCategorySelects(categoryList) {
+    showCategorySelect(categoryList) {
         this.categoryElement.innerHTML = ''; // очищаем select
         categoryList.forEach(item => {
             const option = document.createElement("option");
             option.value = item.id;
             option.innerText = item.title;
-            if (this.params.id === option.value) {
-                option.selected = true;
-            }
             this.categoryElement.appendChild(option);
         });
     }

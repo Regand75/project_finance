@@ -5,14 +5,15 @@ export class OperationEdit {
     constructor(parseHash) {
         const { params } = parseHash();
         this.params = params;
+        this.operationOriginalData= null;
         this.typeElement = document.getElementById('typeSelect');
         this.categoryElement = document.getElementById('categorySelect');
         this.operationEditButton = document.getElementById('operation-edit');
-        this.operationEditButton.addEventListener('click', this.saveOperation.bind(this));
+        // this.operationEditButton.addEventListener('click', this.saveOperation.bind(this));
 
         CommonUtils.initBackButton();
 
-        this.typeElement.addEventListener('change', this.changeCategorySelect.bind(this));
+        // this.typeElement.addEventListener('change', this.changeCategorySelect.bind(this));
 
         this.fields = [
             {
@@ -48,18 +49,32 @@ export class OperationEdit {
     }
 
     async getOperation(id) {
-        let amount = this.fields.find(item => item.name === 'amount').element.value;
-        let date = this.fields.find(item => item.name === 'date').element.value;
-        let comment = document.getElementById('comment').value;
         try {
             const operationResult = await OperationsService.getOperation(`/${id}`);
-            console.log(operationResult);
-            if (operationResult && operationResult.length > 0) {
-                this.showTypeSelects();
-                this.showCategorySelects(operationResult);
-                amount = operationResult.amount;
-                date = operationResult.date;
-                comment = operationResult.comment;
+            if (operationResult) {
+                console.log(operationResult);
+                this.operationOriginalData = operationResult;
+                for (let i = 0; i < this.typeElement.options.length; i++) {
+                    if (this.typeElement.options[i].value === operationResult.type) {
+                        this.typeElement.options[i].selected = true;
+                    }
+                }
+                this.getCategories(operationResult.type);
+
+                // this.showCategorySelect(operationResult);
+                this.fields.forEach(field => {
+                    const inputElement = document.getElementById(field.id);
+                    if (inputElement) {
+                        field.element = inputElement;
+                        if (field.name === 'date' && operationResult[field.name]) {
+                            // Преобразуем дату в формат день.месяц.год
+                            const date = new Date(operationResult.date); // Преобразуем строку в объект Date
+                            inputElement.value = new Intl.DateTimeFormat('ru-RU').format(date);
+                        } else {
+                            inputElement.value = operationResult[field.name];
+                        }
+                    }
+                });
             } else if (operationResult.error) {
                 console.log(operationResult.error);
                 location.href = '#/operations';
@@ -69,11 +84,11 @@ export class OperationEdit {
         }
     }
 
-    async changeCategorySelect() {
+    async getCategories(type) {
         try {
-            const categoriesResult = await OperationsService.getCategories(`/${this.typeElement.value}`);
+            const categoriesResult = await OperationsService.getCategories(`/${type}`);
             if (categoriesResult && categoriesResult.length > 0) {
-                this.showCategorySelects(categoriesResult);
+                this.showCategorySelect(categoriesResult);
             } else if (categoriesResult.error) {
                 console.log(categoriesResult.error);
                 location.href = '#/operations';
@@ -83,23 +98,30 @@ export class OperationEdit {
         }
     }
 
-    showTypeSelects() {
-        for (let i = 0; i < this.typeElement.options.length; i++) {
-            if (this.typeElement.options[i].value === this.params.category) {
-                this.typeElement.options[i].selected = true;
-            }
-        }
-    }
+    // async changeCategorySelect() {
+    //     try {
+    //         const categoriesResult = await OperationsService.getCategories(`/${this.operationOriginalData.type}`);
+    //         if (categoriesResult) {
+    //             console.log(categoriesResult);
+    //             this.showCategorySelects(categoriesResult);
+    //         } else if (categoriesResult.error) {
+    //             console.log(categoriesResult.error);
+    //             location.href = '#/operations';
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
-    showCategorySelects(categoryList) {
+    showCategorySelect(categoryList) {
         this.categoryElement.innerHTML = ''; // очищаем select
         categoryList.forEach(item => {
             const option = document.createElement("option");
-            option.value = item.id;
-            option.innerText = item.title;
-            if (this.params.id === option.value) {
+            option.value = item.title;
+            if (option.value === this.operationOriginalData.category) {
                 option.selected = true;
             }
+            option.innerText = item.title;
             this.categoryElement.appendChild(option);
         });
     }
@@ -125,31 +147,31 @@ export class OperationEdit {
         return validForm;
     };
 
-    async saveOperation(e) {
-        e.preventDefault();
-
-        if (this.validateForm()) {
-            // const amount = this.fields.find(item => item.name === 'amount').element.value;
-            // const date = CommonUtils.convertDate(this.fields.find(item => item.name === 'date').element.value);
-            // const comment = document.getElementById('comment').value;
-            try {
-                const operationResult = await OperationsService.createOperation({
-                    type: this.typeElement.value,
-                    amount: parseInt(amount),
-                    date: date,
-                    comment: comment,
-                    category_id: parseInt(this.categoryElement.value),
-                });
-                if (operationResult) {
-                    location.href = '#/operations';
-                }
-                if (operationResult.error) {
-                    console.log(operationResult.error);
-                    location.href = `#/${this.typeElement.value}s`;
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
+    // async saveOperation(e) {
+    //     e.preventDefault();
+    //
+    //     if (this.validateForm()) {
+    //         // const amount = this.fields.find(item => item.name === 'amount').element.value;
+    //         // const date = CommonUtils.convertDate(this.fields.find(item => item.name === 'date').element.value);
+    //         // const comment = document.getElementById('comment').value;
+    //         try {
+    //             const operationResult = await OperationsService.createOperation({
+    //                 type: this.typeElement.value,
+    //                 amount: parseInt(amount),
+    //                 date: date,
+    //                 comment: comment,
+    //                 category_id: parseInt(this.categoryElement.value),
+    //             });
+    //             if (operationResult) {
+    //                 location.href = '#/operations';
+    //             }
+    //             if (operationResult.error) {
+    //                 console.log(operationResult.error);
+    //                 location.href = `#/${this.typeElement.value}s`;
+    //             }
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    // }
 }
