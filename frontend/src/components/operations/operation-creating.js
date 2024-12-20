@@ -42,7 +42,7 @@ export class OperationCreating {
             item.element.onchange = () => {
                 this.validateField(item, item.element);
             }
-        })
+        });
 
         this.getCategories(this.params.category).then();
     }

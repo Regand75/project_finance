@@ -9,11 +9,9 @@ export class OperationEdit {
         this.typeElement = document.getElementById('typeSelect');
         this.categoryElement = document.getElementById('categorySelect');
         this.operationEditButton = document.getElementById('operation-edit');
-        // this.operationEditButton.addEventListener('click', this.saveOperation.bind(this));
+        this.operationEditButton.addEventListener('click', this.saveOperation.bind(this));
 
         CommonUtils.initBackButton();
-
-        // this.typeElement.addEventListener('change', this.changeCategorySelect.bind(this));
 
         this.fields = [
             {
@@ -38,30 +36,30 @@ export class OperationEdit {
             },
         ];
 
+        this.getOperation(this.params.id).then();
+
         this.fields.forEach(item => {
             item.element = document.getElementById(item.id);
             item.element.onchange = () => {
                 this.validateField(item, item.element);
             }
-        })
-
-        this.getOperation(this.params.id).then();
+        });
     }
 
     async getOperation(id) {
         try {
             const operationResult = await OperationsService.getOperation(`/${id}`);
             if (operationResult) {
-                console.log(operationResult);
-                this.operationOriginalData = operationResult;
+                this.operationOriginalData = operationResult; // сохраняем данные для дальнейшего отслеживания изменений
                 for (let i = 0; i < this.typeElement.options.length; i++) {
                     if (this.typeElement.options[i].value === operationResult.type) {
                         this.typeElement.options[i].selected = true;
                     }
                 }
+                this.typeElement.disabled = true;
                 this.getCategories(operationResult.type);
+                this.categoryElement.disabled = true;
 
-                // this.showCategorySelect(operationResult);
                 this.fields.forEach(field => {
                     const inputElement = document.getElementById(field.id);
                     if (inputElement) {
@@ -74,6 +72,9 @@ export class OperationEdit {
                             inputElement.value = operationResult[field.name];
                         }
                     }
+                });
+                this.fields.forEach(field => {
+                    this.validateField(field, field.element);
                 });
             } else if (operationResult.error) {
                 console.log(operationResult.error);
@@ -98,30 +99,15 @@ export class OperationEdit {
         }
     }
 
-    // async changeCategorySelect() {
-    //     try {
-    //         const categoriesResult = await OperationsService.getCategories(`/${this.operationOriginalData.type}`);
-    //         if (categoriesResult) {
-    //             console.log(categoriesResult);
-    //             this.showCategorySelects(categoriesResult);
-    //         } else if (categoriesResult.error) {
-    //             console.log(categoriesResult.error);
-    //             location.href = '#/operations';
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
     showCategorySelect(categoryList) {
         this.categoryElement.innerHTML = ''; // очищаем select
         categoryList.forEach(item => {
             const option = document.createElement("option");
-            option.value = item.title;
-            if (option.value === this.operationOriginalData.category) {
+            option.value = item.id;
+            option.innerText = item.title;
+            if (option.innerText === this.operationOriginalData.category) {
                 option.selected = true;
             }
-            option.innerText = item.title;
             this.categoryElement.appendChild(option);
         });
     }
@@ -147,31 +133,31 @@ export class OperationEdit {
         return validForm;
     };
 
-    // async saveOperation(e) {
-    //     e.preventDefault();
-    //
-    //     if (this.validateForm()) {
-    //         // const amount = this.fields.find(item => item.name === 'amount').element.value;
-    //         // const date = CommonUtils.convertDate(this.fields.find(item => item.name === 'date').element.value);
-    //         // const comment = document.getElementById('comment').value;
-    //         try {
-    //             const operationResult = await OperationsService.createOperation({
-    //                 type: this.typeElement.value,
-    //                 amount: parseInt(amount),
-    //                 date: date,
-    //                 comment: comment,
-    //                 category_id: parseInt(this.categoryElement.value),
-    //             });
-    //             if (operationResult) {
-    //                 location.href = '#/operations';
-    //             }
-    //             if (operationResult.error) {
-    //                 console.log(operationResult.error);
-    //                 location.href = `#/${this.typeElement.value}s`;
-    //             }
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     }
-    // }
+    async saveOperation(e) {
+        e.preventDefault();
+
+        if (this.validateForm()) {
+            const amount = this.fields.find(item => item.name === 'amount').element.value;
+            const date = CommonUtils.convertDate(this.fields.find(item => item.name === 'date').element.value);
+            const comment = document.getElementById('comment').value;
+            try {
+                const operationResult = await OperationsService.createOperation({
+                    type: this.typeElement.value,
+                    amount: parseInt(amount),
+                    date: date,
+                    comment: comment,
+                    category_id: parseInt(this.categoryElement.value),
+                });
+                if (operationResult) {
+                    location.href = '#/operations';
+                }
+                if (operationResult.error) {
+                    console.log(operationResult.error);
+                    location.href = `#/${this.typeElement.value}s`;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 }
