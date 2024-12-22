@@ -17,7 +17,6 @@ export class Expenses {
         this.getExpenses('expense').then();
         this.modalOverlay = document.getElementById("modal-overlay");
         this.params = null;
-        this.flagDelete = false;
     }
 
     async getExpenses(params) {

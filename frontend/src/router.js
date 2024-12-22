@@ -9,6 +9,7 @@ import {CategoryCreating} from "./components/categories/category-creating.js";
 import {OperationCreating} from "./components/operations/operation-creating.js";
 import {CategoryEdit} from "./components/categories/category-edit.js";
 import {OperationEdit} from "./components/operations/operation-edit.js";
+import {OperationDelete} from "./components/operations/operation-delete.js";
 
 export class Router {
     constructor() {
@@ -71,7 +72,7 @@ export class Router {
                 template: 'src/templates/pages/operations/list.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new OperationsList();
+                    new OperationsList(this.parseHash.bind(this));
                 },
                 styles: [
                     'layout.css',
@@ -100,6 +101,20 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new OperationCreating(this.parseHash.bind(this));
+                },
+                styles: [
+                    'layout.css',
+                    'index.css',
+                    'adaptive.css',
+                ],
+            },
+            {
+                route: '#/operations/delete',
+                title: 'Доходы и расходы',
+                template: 'src/templates/pages/operations/list.html',
+                useLayout: 'src/templates/layout.html',
+                load: () => {
+                    new OperationDelete(this.parseHash.bind(this));
                 },
                 styles: [
                     'layout.css',

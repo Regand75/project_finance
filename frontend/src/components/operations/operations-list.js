@@ -4,8 +4,10 @@ import {FilterUtils} from "../../utils/filter-utils.js";
 import {CommonUtils} from "../../utils/common-utils.js";
 
 export class OperationsList {
-    constructor() {
-        this.buttonNoDeleteElement = document.getElementById('no-delete');
+    constructor(parseHash) {
+        const { params } = parseHash();
+        this.params = params;
+
         this.recordsElement = document.getElementById('records');
         this.filtersContainer = document.getElementById('filters-container'); // Родительский контейнер кнопок фильтра
 
@@ -21,9 +23,6 @@ export class OperationsList {
             location.href = '#/operations/creating?category=expense';
         });
 
-        if (this.buttonNoDeleteElement) {
-            this.buttonNoDeleteElement.addEventListener('click', ModalManager.hideModal);
-        }
         this.getOperations('today').then();
 
         // Инициализация datepicker
@@ -79,7 +78,7 @@ export class OperationsList {
         <td>${formattedDate}</td>
         <td>${operation.comment}</td>
         <td class="text-nowrap">
-            ${CommonUtils.generateGridToolsColumn('operations', operation.id, operation.type)}
+            ${CommonUtils.generateGridToolsColumn('operations', operation.id)}
         </td>
     `;
         return tr;
