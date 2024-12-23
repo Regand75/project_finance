@@ -10,6 +10,7 @@ import {OperationCreating} from "./components/operations/operation-creating.js";
 import {CategoryEdit} from "./components/categories/category-edit.js";
 import {OperationEdit} from "./components/operations/operation-edit.js";
 import {OperationDelete} from "./components/operations/operation-delete.js";
+import {Balance} from "./components/balance.js";
 
 export class Router {
     constructor() {
@@ -29,6 +30,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new Main();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -73,6 +75,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new OperationsList(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -87,6 +90,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new OperationEdit(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -101,6 +105,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new OperationCreating(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -115,6 +120,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new OperationDelete(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -129,6 +135,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new Incomes();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -143,6 +150,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new CategoryEdit(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -157,6 +165,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new CategoryCreating();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -171,6 +180,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new Expenses();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -185,6 +195,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new CategoryEdit(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -199,6 +210,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new CategoryCreating();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',

@@ -25,6 +25,7 @@ export class OperationDelete {
         try {
             const operationResult = await OperationsService.deleteOperation(`/${this.params.id}`);
             if (operationResult) {
+                ModalManager.hideModal();
                 location.href = '#/operations';
                 console.log('DELETED operation');
             } else if (operationResult.error) {
