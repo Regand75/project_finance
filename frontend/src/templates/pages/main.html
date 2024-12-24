@@ -3,32 +3,33 @@
         <div class="main-title-block title-block mx-xl-5">
             <h1 class="main-title title">Главная</h1>
         </div>
-        <div class="main-filter d-flex flex-row flex-wrap align-items-center mx-xl-5">
+        <div class="main-filter d-flex flex-row flex-wrap align-items-center mx-xl-5" id="filters-container">
             <div class="main-filter-block">
                 <button class="filter-button btn btn-secondary border-secondary w-100" type="button"
                         id="main-button-today" data-period="today">Сегодня
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-week"
-                        data-period="week">
+                <button class="filter-button btn border-secondary w-100" type="button"
+                        id="main-button-week" data-period="week">
                     Неделя
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-mouth"
-                        data-period="mouth">
+                <button class="filter-button btn border-secondary w-100" type="button"
+                        id="main-button-month" data-period="month">
                     Месяц
                 </button>
             </div>
             <div class="main-filter-block">
-                <button class="filter-button btn border-secondary w-100" type="button" id="main-button-year"
-                        data-period="year">Год
+                <button class="filter-button btn border-secondary w-100" type="button"
+                        id="main-button-year" data-period="year">Год
                 </button>
             </div>
             <div class="main-filter-block">
                 <button class="filter-button btn border-secondary w-100" type="button" id="main-button-all"
-                        data-period="all">Все
+                        data-period="all">
+                    Все
                 </button>
             </div>
             <div class="main-filter-block">
@@ -41,7 +42,7 @@
                 <div class="main-filter-block">
                     <span>с</span>
                 </div>
-                <div class="main-filter-block filter-block">
+                <div class="main-filter-block filter-block me-2">
                     <input type="text" name="date-from" placeholder="Дата" id="date-from">
                 </div>
                 <div class="main-filter-block">

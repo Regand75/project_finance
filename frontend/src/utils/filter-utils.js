@@ -25,7 +25,7 @@ export class FilterUtils {
         return `${year}-${month}-${day}`;
     }
 
-    static async handleFilterClick(event, showRecords) {
+    static async handleFilterClick(event, showRecords = null, updateChart = null) {
         const target = event.target.closest('button[data-period]');
         const filterIntervalHiddenElement = document.getElementById('filter-block');
         if (target) {
@@ -68,7 +68,12 @@ export class FilterUtils {
                                     `?period=${period}&dateFrom=${convertedFrom}&dateTo=${convertedTo}`
                                 );
                                 if (operationsResult) {
-                                    showRecords(operationsResult); // Обновляем записи
+                                    if (showRecords) {
+                                        showRecords(operationsResult); // Обновляем записи
+                                    }
+                                    if (updateChart) {
+                                        updateChart(operationsResult); // Обновляем графики
+                                    }
                                 } else if (operationsResult.error) {
                                     console.log(operationsResult.error);
                                     location.href = '#/';
@@ -91,7 +96,12 @@ export class FilterUtils {
                             `?period=${period}&dateFrom=${convertedFromValue}&dateTo=${convertedToValue}`
                         );
                         if (operationsResult) {
-                            showRecords(operationsResult); // Обновляем записи
+                            if (showRecords) {
+                                showRecords(operationsResult); // Обновляем записи
+                            }
+                            if (updateChart) {
+                                updateChart(operationsResult); // Обновляем графики
+                            }
                         } else if (operationsResult.error) {
                             console.log(operationsResult.error);
                             location.href = '#/';
@@ -104,7 +114,12 @@ export class FilterUtils {
                 try {
                     const operationsResult = await OperationsService.getOperations(`?period=${period}`);
                     if (operationsResult) {
-                        showRecords(operationsResult); // Обновляем записи
+                        if (showRecords) {
+                            showRecords(operationsResult); // Обновляем записи
+                        }
+                        if (updateChart) {
+                            updateChart(operationsResult); // Обновляем графики
+                        }
                     } else if (operationsResult.error) {
                         console.log(operationsResult.error);
                         location.href = '#/';

@@ -1,4 +1,3 @@
-import {ModalManager} from "../modal.js";
 import {OperationsService} from "../../services/operations-service.js";
 import {FilterUtils} from "../../utils/filter-utils.js";
 import {CommonUtils} from "../../utils/common-utils.js";
