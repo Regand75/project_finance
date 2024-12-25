@@ -54,7 +54,7 @@ export class OperationCreating {
     async getCategories(categoryType) {
         try {
             const categoriesResult = await OperationsService.getCategories(`/${categoryType}`);
-            if (categoriesResult && categoriesResult.length > 0) {
+            if (categoriesResult) {
                 this.showTypeSelects();
                 this.showCategorySelect(categoriesResult);
             } else if (categoriesResult.error) {

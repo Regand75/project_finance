@@ -1,5 +1,6 @@
 import {OperationsService} from "../../services/operations-service.js";
 import {CommonUtils} from "../../utils/common-utils.js";
+import {FilterUtils} from "../../utils/filter-utils.js";
 
 export class OperationEdit {
     constructor(parseHash) {
@@ -35,6 +36,9 @@ export class OperationEdit {
                 valid: false,
             },
         ];
+
+        // Инициализация datepicker
+        FilterUtils.initializeDatepickers();
 
         this.getOperation(this.params.id).then();
 
