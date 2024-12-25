@@ -37,7 +37,7 @@ export class Expenses {
         this.params = JSON.parse(this.modalOverlay.dataset.params); // получаем id и название категории, которую надо удалить
         try {
             const operationsResult = await OperationsService.getOperations(`?period=all`); // получаем все операции для последующего удаления совпадающих с удаляемой категорией
-            if (operationsResult && operationsResult.length > 0) {
+            if (operationsResult) {
                 const operationsToDeleteResult = operationsResult.filter(item => item.category === this.params.category); // находим все записи, связанные с удаляемой категорией
                 if (operationsToDeleteResult) {
                     const deleteCategoryResult = await OperationsService.deleteCategory(`/expense/${this.params.id}`); // удаляем категорию

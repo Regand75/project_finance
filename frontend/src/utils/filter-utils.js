@@ -16,6 +16,13 @@ export class FilterUtils {
             todayHighlight: true,
             language: 'ru',
         });
+
+        $('#date').datepicker({
+            format: 'dd.mm.yyyy',
+            autoclose: true,
+            todayHighlight: true,
+            language: 'ru',
+        });
     }
 
     static convertDate(dateString) {
