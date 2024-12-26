@@ -1,6 +1,5 @@
-import {CustomHttp} from "../../services/custom-http.js";
-import config from "../../../config/config.js";
-import {Auth} from "../../services/auth.js";
+import {AuthUtils} from "../../utils/auth-utils.js";
+import {AuthService} from "../../services/auth-service.js";
 
 export class Form {
     constructor(page) {
@@ -112,19 +111,16 @@ export class Form {
                 const {name, lastName} = this.extractNameAndLastName(nameField.element.value);
 
                 try {
-                    const result = await CustomHttp.request(config.host + '/signup', 'POST', {
+                    const signupResult = await AuthService.signup({
                         name: name,
                         lastName: lastName,
                         email: email,
                         password: password,
                         passwordRepeat: this.fields.find(item => item.name === 'passwordRepeat').element.value,
                     });
-
-                    if (result) {
-                        if (result.errors || !result.user) {
-                            this.commonErrorElement.style.display = 'block';
-                            throw new Error(result.message);
-                        }
+                    if (!signupResult) {
+                        this.commonErrorElement.style.display = 'block';
+                        return;
                     }
                 } catch (error) {
                     return console.log(error);
@@ -140,20 +136,18 @@ export class Form {
                     body.rememberMe = true;
                 }
 
-                const result = await CustomHttp.request(config.host + '/login', 'POST', body);
-
-                if (result) {
-                    if (result.error || !result.tokens.accessToken || !result.tokens.refreshToken || !result.user.name || !result.user.lastName || !result.user.id) {
-                        this.commonErrorElement.style.display = 'block';
-                        throw new Error(result.message);
-                    }
-                    Auth.setToken(result.tokens.accessToken, result.tokens.refreshToken);
-                    Auth.setUserInfo({
-                        name: result.user.name,
-                        lastName: result.user.lastName,
-                        id: result.user.id,
+                const loginResult = await AuthService.login(body);
+                if (loginResult) {
+                    AuthUtils.setToken(loginResult.tokens.accessToken, loginResult.tokens.refreshToken);
+                    AuthUtils.setUserInfo({
+                        name: loginResult.user.name,
+                        lastName: loginResult.user.lastName,
+                        id: loginResult.user.id,
                     });
                     location.href = '#/';
+                } else {
+                    this.commonErrorElement.style.display = 'block';
+                    return;
                 }
             } catch (error) {
                 console.log(error);

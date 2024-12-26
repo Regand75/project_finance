@@ -1,6 +1,5 @@
-import {CustomHttp} from "../../services/custom-http.js";
-import config from "../../../config/config.js";
-import {Auth} from "../../services/auth.js";
+import {AuthUtils} from "../../utils/auth-utils.js";
+import {AuthService} from "../../services/auth-service.js";
 
 export class Logout {
     constructor() {
@@ -11,17 +10,16 @@ export class Logout {
     }
 
     async logout() {
-        const refreshToken = localStorage.getItem(Auth.refreshTokenKey);
+        const refreshToken = localStorage.getItem(AuthUtils.refreshTokenKey);
         if (refreshToken) {
-            const result = await CustomHttp.request(config.host + '/logout', 'POST', {
+            await AuthService.logOut({
                 refreshToken: refreshToken,
             });
-            console.log(result);
-            Auth.removeToken();
-            Auth.removeUserInfo();
+            AuthUtils.removeToken();
+            AuthUtils.removeUserInfo();
             window.location.href = '#/login';
         } else {
-            Auth.removeUserInfo();
+            AuthUtils.removeUserInfo();
             window.location.href = '#/login';
         }
     }

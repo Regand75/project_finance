@@ -11,7 +11,9 @@
   "description": "",
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.6"
+    "bootstrap-datepicker": "^1.10.0",
+    "chart.js": "^4.4.6",
+    "jquery": "^3.7.1"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

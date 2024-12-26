@@ -5,6 +5,7 @@
     position: fixed;
     top: 0;
     width: 219px;
+    z-index: 2;
 }
 
 .sidebar-background {

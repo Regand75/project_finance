@@ -1,10 +1,16 @@
 import {Main} from "./components/main.js";
-import {Incomes} from "./components/incomes.js";
-import {Expenses} from "./components/expenses.js";
-import {IncomesExpense} from "./components/incomes-expenses.js";
-import {Auth} from "./services/auth.js";
+import {Incomes} from "./components/incomes/incomes.js";
+import {Expenses} from "./components/expenses/expenses.js";
+import {OperationsList} from "./components/operations/operations-list.js";
+import {AuthUtils} from "./utils/auth-utils.js";
 import {Logout} from "./components/auth/logout.js";
 import {Form} from "./components/auth/form.js";
+import {CategoryCreating} from "./components/categories/category-creating.js";
+import {OperationCreating} from "./components/operations/operation-creating.js";
+import {CategoryEdit} from "./components/categories/category-edit.js";
+import {OperationEdit} from "./components/operations/operation-edit.js";
+import {OperationDelete} from "./components/operations/operation-delete.js";
+import {Balance} from "./components/balance.js";
 
 export class Router {
     constructor() {
@@ -24,6 +30,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new Main();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -62,12 +69,13 @@ export class Router {
                 }
             },
             {
-                route: '#/incomes-expenses',
+                route: '#/operations',
                 title: 'Доходы и расходы',
-                template: 'src/templates/pages/incomes-expenses/incomes-expenses.html',
+                template: 'src/templates/pages/operations/list.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomesExpense();
+                    new OperationsList(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -76,12 +84,13 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes-expenses/edit',
+                route: '#/operations/edit',
                 title: 'Доходы и расходы',
-                template: 'src/templates/pages/incomes-expenses/edit.html',
+                template: 'src/templates/pages/operations/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomesExpense();
+                    new OperationEdit(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -90,12 +99,28 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes-expenses/creating',
+                route: '#/operations/creating',
                 title: 'Доходы и расходы',
-                template: 'src/templates/pages/incomes-expenses/creating.html',
+                template: 'src/templates/pages/operations/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new IncomesExpense(t);
+                    new OperationCreating(this.parseHash.bind(this));
+                    new Balance();
+                },
+                styles: [
+                    'layout.css',
+                    'index.css',
+                    'adaptive.css',
+                ],
+            },
+            {
+                route: '#/operations/delete',
+                title: 'Доходы и расходы',
+                template: 'src/templates/pages/operations/list.html',
+                useLayout: 'src/templates/layout.html',
+                load: () => {
+                    new OperationDelete(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -110,6 +135,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new Incomes();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -118,12 +144,13 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes/edit',
+                route: '#/income/edit',
                 title: 'Редактирование доходов',
                 template: 'src/templates/pages/incomes/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Incomes();
+                    new CategoryEdit(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -132,12 +159,13 @@ export class Router {
                 ],
             },
             {
-                route: '#/incomes/creating',
-                title: 'Создание доходов',
+                route: '#/income/creating',
+                title: 'Создание дохода',
                 template: 'src/templates/pages/incomes/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Incomes();
+                    new CategoryCreating();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -152,6 +180,7 @@ export class Router {
                 useLayout: 'src/templates/layout.html',
                 load: () => {
                     new Expenses();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -160,12 +189,13 @@ export class Router {
                 ],
             },
             {
-                route: '#/expenses/edit',
+                route: '#/expense/edit',
                 title: 'Редактирование расходов',
                 template: 'src/templates/pages/expenses/edit.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Expenses();
+                    new CategoryEdit(this.parseHash.bind(this));
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -174,12 +204,13 @@ export class Router {
                 ],
             },
             {
-                route: '#/expenses/creating',
+                route: '#/expense/creating',
                 title: 'Создание расходов',
                 template: 'src/templates/pages/expenses/creating.html',
                 useLayout: 'src/templates/layout.html',
                 load: () => {
-                    new Expenses();
+                    new CategoryCreating();
+                    new Balance();
                 },
                 styles: [
                     'layout.css',
@@ -195,9 +226,22 @@ export class Router {
         window.addEventListener('popstate', this.activateRoute.bind(this));
     }
 
+    parseHash() {
+        const hash = window.location.hash; // Получаем hash из адресной строки
+        const [routeWithHash, queryString] = hash.split('?'); // Разделяем на маршрут и параметры
+
+        const params = queryString ? Object.fromEntries(new URLSearchParams(queryString).entries()) : null; // Если параметры есть, создаем объект URLSearchParams
+
+        return {
+            routeWithHash, // Маршрут с символом #
+            params         // Объект URLSearchParams для извлечения параметров
+        };
+    }
+
     async activateRoute() {
+        const { routeWithHash } = this.parseHash(); // Получаем текущий маршрут
         const previousRoute = this.currentRoute; // Сохраняем предыдущий маршрут
-        this.currentRoute = window.location.hash; // Обновляем текущий маршрут
+        this.currentRoute = routeWithHash; // Обновляем текущий маршрут
         // Находим объект маршрута для предыдущего
         const previousRouteObject = this.routes.find(route => route.route === previousRoute);
         if (previousRouteObject.styles && previousRouteObject.styles.length > 0) {
@@ -211,7 +255,9 @@ export class Router {
         }
 
         const newRoute = this.routes.find(item => {
-            return item.route === window.location.hash;
+            const {routeWithHash} = this.parseHash(); //получаем маршрут без параметров
+            // return item.route === window.location.hash;
+            return item.route === routeWithHash;
         });
 
         if (newRoute) {
@@ -236,7 +282,7 @@ export class Router {
                     this.contentPageElement.innerHTML = await fetch(newRoute.useLayout).then(response => response.text());
                     contentBlock = document.getElementById('content-layout');
                     this.profileUserElement = document.getElementById('profile-user');
-                    const userInfo = Auth.getUserInfo();
+                    const userInfo = AuthUtils.getUserInfo();
 
                     if (userInfo && userInfo.name && userInfo.lastName) {
                         this.profileUserElement.innerText = `${userInfo.name} ${userInfo.lastName}`;
@@ -272,25 +318,25 @@ export class Router {
     activateMenuItem(route) {
         document.querySelectorAll('.nav-link').forEach(link => {
             const href = link.getAttribute('href');
-            if ((route.route === href && href !== '#/') || (route.route === "#/" && href === '#/')) {
+            if ((route.route.includes(href) && href !== '#/') || (route.route === "#/" && href === '#/')) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
             }
+            if (route.route.includes('#/incomes') || route.route.includes('#/expenses')) {
+                this.toggleElement.classList.add('active');
+                this.activeBlockElement.classList.add('active-block');
+                this.toggleElement.classList.remove('collapsed');
+                this.listElement.classList.add('show');
+                this.collapsedSvgElement.classList.add('collapsed');
+            } else {
+                this.toggleElement.classList.remove('active');
+                this.activeBlockElement.classList.remove('active-block');
+                this.toggleElement.classList.add('collapsed');
+                this.listElement.classList.remove('show');
+                this.collapsedSvgElement.classList.remove('collapsed');
+            }
         });
-        if (route.route === '#/incomes' || route.route === '#/expenses') {
-            this.toggleElement.classList.add('active');
-            this.activeBlockElement.classList.add('active-block');
-            this.toggleElement.classList.remove('collapsed');
-            this.listElement.classList.add('show');
-            this.collapsedSvgElement.classList.add('collapsed');
-        } else {
-            this.toggleElement.classList.remove('active');
-            this.activeBlockElement.classList.remove('active-block');
-            this.toggleElement.classList.add('collapsed');
-            this.listElement.classList.remove('show');
-            this.collapsedSvgElement.classList.remove('collapsed');
-        }
     }
 
     showSidebar() {
